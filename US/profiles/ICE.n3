@@ -1,0 +1,7 @@
+@prefix : <http://dice.csail.mit.edu/idm/US/profiles/ICE#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>
+
+:ICE a org:GovernmentAgency ;
+    rdfs:label "Immigration and Customs Enforcement"@en ;
+    org:parentOrganization <http://dice.csail.mit.edu/idm/US/profiles/DHS#DHS> .

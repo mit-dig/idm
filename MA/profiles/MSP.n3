@@ -1,0 +1,7 @@
+@prefix : <http://dice.csail.mit.edu/idm/MA/profiles/MSP#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>
+
+:MSP a org:GovernmentAgency ;
+    rdfs:label "the Massachusetts State Police"@en ;
+    org:parentOrganization <http://dice.csail.mit.edu/idm/MA/profiles/ExecutiveBranch#ExecutiveBranch> .

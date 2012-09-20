@@ -1,0 +1,6 @@
+@prefix : <http://dice.csail.mit.edu/idm/MA/profiles/ExecutiveBranch#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>
+
+:ExecutiveBranch a org:Organization ;
+    rdfs:label "the executive branch of the government of the Commonwealth of Massachusetts"@en .

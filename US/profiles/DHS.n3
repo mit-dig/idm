@@ -1,0 +1,7 @@
+@prefix : <http://dice.csail.mit.edu/idm/US/profiles/DHS#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>
+
+:DHS a org:GovernmentAgency ;
+    rdfs:label "the Department of Homeland Security"@en ;
+    org:parentOrganization <http://dice.csail.mit.edu/idm/US/profiles/ExecutiveBranch#ExecutiveBranch> .
