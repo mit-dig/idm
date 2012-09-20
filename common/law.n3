@@ -1,0 +1,13 @@
+@prefix : <http://dice.csail.mit.edu/idm/common/law#>
+@prefix owl: <http://www.w3.org/2002/07/owl#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+:primaryFunction a owl:ObjectProperty ;
+    rdfs:label "primary function"@en ;
+    rdfs:range :Function .
+
+:Function a owl:Class ;
+    rdfs:label "Function"@en .
+
+:Investigation a :Function ;
+    rdfs:label "Investigation"@en .
