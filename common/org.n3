@@ -1,0 +1,47 @@
+@prefix : <http://dice.csail.mit.edu/idm/common/org#>
+@prefix owl: <http://www.w3.org/2002/07/owl#>
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+@prefix foaf: <http://xmlns.org/foaf/0.1/>
+
+:Organization a owl:Class ;
+    rdfs:label "Organization"@en ;
+    owl:equivalentClass foaf:Organization .
+
+:memberOf a owl:ObjectProperty ;
+    rdfs:label "member of"@en ;
+    rdfs:range :Organization ;
+    owl:inverseOf :hasMember .
+
+:member a owl:ObjectProperty ;
+    rdfs:label "has member"@en ;
+    rdfs:domain :Organization ;
+    owl:equivalentProperty foaf:member ;
+    owl:inverseOf :memberOf .
+
+:GovernmentAgency a owl:Class ;
+    rdfs:label "Government Agency"@en ;
+    rdfs:subClassOf :Organization .
+
+:parentOrganization a owl:ObjectProperty ;
+    rdfs:label "parent organization"@en ;
+    rdfs:domain :Organization ;
+    rdfs:range :Organization ;
+    owl:inverseOf :childOrganization .
+
+:childOrganization a owl:ObjectProperty ;
+    rdfs:label "child organization"@en ;
+    rdfs:domain :Organization ;
+    rdfs:range :Organization ;
+    owl:inverseOf :parentOrganization .
+
+:ancestorOrganization a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "ancestor organization"@en ;
+    rdfs:domain :Organization ;
+    rdfs:range :Organization ;
+    owl:inverseOf :descendantOrganization .
+
+:descendantOrganization a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "descendant organization"@en;
+    rdfs:domain :Organization ;
+    rdfs:range :Organization ;
+    owl:inverseOf :ancestorOrganization .
