@@ -1,0 +1,4 @@
+var senders = [
+  {name:"Mia Analysa", email:"mia@msp.mass.gov", uri:"http://dice.csail.mit.edu/2012/JHU/MA/profiles/MiaAnalysa#me"},
+  {name:"Feddy Agenti", email:"fed@dhs.us.gov", uri:"http://dice.csail.mit.edu/2012/JHU/US/profiles/FredAgenti#me"},
+]                                                 

@@ -1,0 +1,47 @@
+# DHS Ontology
+#
+# The purpose of this file is to hold definitions about DHS Federal Agents 
+# that we will want to reason about.
+#
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/US/DHS/rules/dhs_ONT#>.
+@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/DHS/rules/dhs_ONT#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+:Function
+   a   rdfs:Class;
+   rdfs:label
+      "Agency Function".
+
+:apprehension
+   rdfs:subClassOf dhs:Function;
+   rdfs:label
+      "apprehension of criminal offenders". 
+
+:enforcement
+    rdfs:subClassOf dhs:Function;
+    rdfs:label "enforcement of immigration and customs laws".
+
+:investigation
+    rdfs:subClassOf dhs:Function;
+    rdfs:label "investigation of possible violation of immigration and customs laws".
+
+:Party
+   a rdfs:Class;
+   rdfs:label
+      "A party involved in a transaction".
+
+:Agent
+   rdfs:label
+      "Federal Law Enforcement Agent";
+   rdfs:comment
+      "";
+   rdfs:subClassOf dhs:Party.
+
+:Special_Agent
+   rdfs:label
+      "Special Agent";
+   rdfs:subClassOf dhs:Agent.
+

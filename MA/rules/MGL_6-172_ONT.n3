@@ -1,0 +1,449 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
+@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+:Party
+   a rdfs:Class;
+   rdfs:label
+      "A party involved in a transaction".
+
+:sender
+   rdfs:label
+      "Sender";
+   rdfs:subClassOf foaf:Person. 
+
+:receiver
+   rdfs:label
+      "Receiver";
+   rdfs:subClassOf foaf:Person.
+
+:document
+   rdfs:label
+      "Document";
+   rdfs:subClassOf r:resource.
+
+#####Actors#####
+:MA_Executive_Branch
+   rdfs:label
+      "MA, Executive Branch";
+   rdfs:subClassOf mgl:Party.
+:The_Board
+   rdfs:label
+      "The Board";
+   rdfs:subClassOf mgl:Party.
+
+#####Recipients#####
+:Criminal_Justice_Agency
+   rdfs:label
+      "Criminal Justice Agency";
+   rdfs:subClassOf mgl:Agency.
+:Agency_Required_by_Statute
+   rdfs:label
+      "Agency Required by Statute";
+   rdfs:comment
+      "Such other agencies and individuals required to have access to such information by statute including United States Armed Forces recruiting offices";
+   rdfs:subClassOf mgl:Agency.
+:Agency_Performing_Public_Service
+   rdfs:label
+      "Agency Performing a Public Service";
+   rdfs:comment
+      "Any other agencies and individuals where it has been determined that the public interest in disseminating such information to these parties clearly outweighs the interest in security and privacy";
+   rdfs:subClassOf mgl:Agency.
+:Agency
+   rdfs:label
+      "An Agency or the Executive Branch of the Government";
+   rdfs:subClassOf mgl:Party;
+   rdfs:comment
+      "any agency of the executive branch of the government, including but not limited to any constitutional or other office, executive office, department, division, bureau, board, commission or committee thereof; or any authority created by the general court to serve a public purpose, having either statewide or local jurisdiction.".
+
+:Criminal_Offender_Record_Information
+   rdfs:label
+      "Criminal Offender Record Information";
+   rdfs:comment
+      "records and data in any communicable form compiled by a criminal justice agency which concern an identifiable individual and relate to the nature or disposition of a criminal charge, an arrest, a pre-trial proceeding, other judicial proceedings, sentencing, incarceration, rehabilitation, or release. Such information shall be restricted to that recorded as the result of the initiation of criminal proceedings or any consequent proceedings related thereto. Criminal offender record information shall not include evaluative information, statistical and analytical reports and files in which individuals are not directly or indirectly identifiable, or intelligence information. Criminal offender record information shall be limited to information concerning persons who have attained the age of seventeen and shall not include any information concerning criminal offenses or acts of delinquency committed by any person before he attained the age of seventeen; provided, however, that if a person under the age of seventeen is adjudicated as an adult, information relating to such criminal offense shall be criminal offender record information. Criminal offender record information shall not include information concerning any offenses which are not punishable by incarceration.";
+   rdfs:subClassOf
+      mgl:Information.
+
+:Disseminate
+   rdfs:comment
+      "the act of sharing information from one party to another";
+   rdfs:label
+      "Disseminate information";
+   rdfs:subClassOf
+      mgl:Event.
+
+:Information
+   rdfs:label
+      "Information";
+   rdfs:subClassOf
+      mgl:data.
+
+:Conviction_Data
+   rdfs:label
+      "Conviction Data";
+   rdfs:subClassOf
+      mgl:Information.
+
+:Court_Record
+   rdfs:label
+      "Criminal Case Court Records";
+   rdfs:subClassOf
+      mgl:data.
+
+:Event 
+   a rdfs:Class; 
+   rdfs:comment 
+      "an event occurs in the log";
+   rdfs:label 
+      "Event".
+:by
+   a   r:Property;
+   rdfs:comment
+      "person who sends information";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "by";
+   rdfs:range
+      mgl:Party.
+:data
+   a   r:Property;
+   rdfs:comment
+      "the data being shared";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "data".
+:to
+   a   r:Property;
+   rdfs:comment
+      "person who receives information";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "to";
+   rdfs:range
+      mgl:Party.
+
+:performing_duties
+   a   r:Property;
+   rdfs:comment 
+      "if the recipient is performing their duties";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "actually performing duties";
+   rdfs:range
+      mgl:Party.
+
+:necessary_for
+   a   r:Property;
+   rdfs:label "necessary for actual performance of";
+   rdfs:domain :Party;
+   rdfs:range :Duty.
+
+:performing
+   a   r:Property;
+   rdfs:comment "actually performing statutory duties";
+   rdfs:label "actually performing";
+   rdfs:domain :Party;
+   rdfs:range :Duty.
+
+:situation
+   a   r:Property;
+   rdfs:comment "the current situation and context";
+   rdfs:domain mgl:Event;
+   rdfs:label "situation".
+
+#####Duties#####
+:Duty
+   a   rdfs:Class;
+   rdfs:label "Duty";
+   rdfs:comment "statutory duty".
+
+:Criminal_Justice_Duties
+   rdfs:subClassOf mgl:Duty;
+   rdfs:label "Criminal Justice Duties";
+   rdfs:comment "criminal justice duties of a criminal justice agency (receiving information)".
+
+:Agency_Duties
+   rdfs:subClassOf mgl:Duty;
+   rdfs:label "Agency Duties";
+   rdfs:comment "statutory duties of the agency (receiving information)".
+
+:Public_Interest
+   rdfs:subClassOf mgl:Duty;
+   rdfs:label "Duties Sustaining the Public Interest";
+   rdfs:comment "actions or duties sustaing the public interest (by the receiving party)".
+
+:certified_by
+   a   r:Property;
+   rdfs:comment
+      "certified, in writing, as eligible for access, by the board OR ";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "certified by";
+   rdfs:range
+      mgl:Certifier.
+
+:granted_access_by
+   a   r:Property;
+   rdfs:comment "granted access when ruling on an appeal of the board's denial of certification by a final judgment of";
+   rdfs:label "granted access by";
+   rdfs:domain
+      mgl:Event;
+   rdfs:range
+      mgl:Certifier.
+
+:Certifier
+   a   r:Class;
+   rdfs:label "Certifier";
+   rdfs:comment "An organization which can grant an individual or agency access to information".
+
+# Note, there's another definition of :The_Board above.  It probably wants to be merged.
+
+:The_Board
+   a   mgl:Certifier;
+   rdfs:label "the Board"; #definition to be determined by kkw
+   rdfs:domain :Party.
+
+:Court_of_Competent_Jurisdiction
+   a   mgl:Certifier;
+   rdfs:label "A Court of Competent Jurisdiction";
+   rdfs:domain :Party.
+
+:based_upon
+   a   r:Property;
+   rdfs:label "based upon";
+   rdfs:domain mgl:data.
+
+:personal_characteristics
+   a   r:Property;
+   rdfs:comment 
+      "name, fingerprints, or other personal identifying characteristics";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "personally identifying information";
+   rdfs:range
+      mgl:Information.
+
+:personal_information
+   a   r:Property;
+   rdfs:comment 
+      "identifies family members, friends, medical or psychological history, or any other personal information";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "personal information";
+   rdfs:range
+      mgl:Information.
+
+:subject_name
+   rdfs:subPropertyOf mgl:personal_characteristics;
+   rdfs:comment "Name of the person who is the subject of inquiry";
+   rdfs:label "Name".
+
+:subject_fingerprints
+   rdfs:subPropertyOf mgl:personal_characteristics;
+   rdfs:comment "Fingerprints of the person who is the subject of inquiry";
+   rdfs:label "fingerprints".
+
+:subject_other
+   rdfs:subPropertyOf mgl:personal_characteristics;
+   rdfs:comment "Other personally identifiable characteristics of the person who is the subject of inquiry";
+   rdfs:label "Other".
+ 
+:Categories_or_Data
+   a   r:Property;
+   rdfs:comment "categories of offense or data elements other than said personal identifying characteristics";
+   rdfs:domain
+      mgl:Event;
+   rdfs:label
+      "Categories of Offense or Other Personal Data Elements";
+   rdfs:range
+      mgl:Information.
+
+:determined_to_be_necessary_by
+   a   r:Property;
+   rdfs:label 
+      "determined to be necessary by";
+   rdfs:comment 
+      "a two-thirds majority of the members present and voting, determines and certifies that the public interest in disseminating such information to such party clearly outweighs the interest in security and privacy";
+   rdfs:domain
+      mgl:data.
+
+:maintained_by
+   a   r:Property;
+   rdfs:label "maintained by";
+   rdfs:comment "maintained in a standardized format in its automated criminal history file by";
+   rdfs:domain
+      mgl:data.
+
+:sentence_imposed_on
+   a   r:Property;
+   rdfs:label 
+      "sentence imposed on";
+   rdfs:comment "Date upon which sentence was imposed.";
+   rdfs:domain
+      mgl:Event.
+
+:sentence_imposed
+   a   r:Property;
+   rdfs:label 
+      "sentence imposed";
+   rdfs:comment "Duration of sentence imposed, but actual sentence served may be different with parole.";
+   rdfs:domain
+      mgl:Event.
+
+:sentence_length
+   a   r:Property;
+   rdfs:label
+      "Sentence Length";
+   rdfs:domain
+      mgl:Event.
+
+:maximum_allowable_sentence_length
+   a   r:Property;
+   rdfs:label
+      "Maximum Allowable Sentence Length";
+   rdfs:domain
+      mgl:Event.
+
+:parole_length
+   a   r:Property;
+   rdfs:label
+      "Parole Length";
+   rdfs:domain
+      mgl:Event.
+
+:crime_type
+   a   r:Property;
+   rdfs:label
+      "Crime Type";
+   rdfs:comment
+      " committed a crime which is defined as a ";
+   rdfs:domain
+      mgl:Event.
+
+:Felony
+   a   r:Class;
+   rdfs:label
+      "Felony".
+
+:Misdemeanor
+   a   r:Class;
+   rdfs:label
+      "Misdemeanor".
+
+:Current_Date
+   a   rdfs:Class;
+   rdfs:label
+      "##-##-####".
+
+
+:convicted_pursuant
+   a   r:Property;
+   rdfs:label "convicted pursuant".
+
+:sentenced_pursuant
+   a   r:Property;
+   rdfs:label "sentenced pursuant".
+
+:has_custody_status
+   a   r:Property;
+   rdfs:label "has custody status".
+
+:Custody_Status
+   a r:Class;
+   rdfs:label "current custody status".
+
+:Sentence
+   a r:Class;
+   rdfs:label "sentence imposed".
+
+:Probation
+   rdfs:label "probation";
+   rdfs:subClassOf mgl:Sentence.
+
+:Parole
+   rdfs:label "parole";
+   rdfs:subClassOf mgl:Sentence.
+
+:Imprisonment
+   rdfs:label "imprisonment";
+   rdfs:subClassOf mgl:Sentence.
+
+
+:principle_function
+   a   r:Property;
+   rdfs:label
+      " whose principle function is ";
+   rdfs:domain
+      mgl:Event.
+
+:primary_function
+   a   r:Property;
+   rdfs:label
+      " whose primary function is ";
+   rdfs:domain
+      mgl:Event.
+
+:Function
+   a   rdfs:Class;
+   rdfs:label
+      "Agency Function".
+
+:apprehension
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "apprehension of criminal offenders". 
+
+:prosecution
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "prosecution of criminal offenders". 
+
+:defense
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "defense of criminal offenders". 
+
+:adjudication
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "adjudication of criminal offenders". 
+
+:incarceration
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "incarceration of criminal offenders". 
+
+:rehabilitation
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "rehabilitation of criminal offenders". 
+
+:collection
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "collection of criminal offender record information".
+
+:storage
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "storage of criminal offender record information".
+
+:dissemination
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "dissemination of criminal offender record information".
+
+:usage
+   rdfs:subClassOf mgl:Function;
+   rdfs:label
+      "usage of criminal offender record information".
+

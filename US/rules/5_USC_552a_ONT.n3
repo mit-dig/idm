@@ -1,0 +1,409 @@
+# $Date: 2009-08-21 14:29:42 -0400 (Fri, 21 Aug 2009) $
+# $Revision: 27324 $
+# $Author: mjsweig $
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/5_USC_552a_ONT#>.
+@prefix pri: <http://dig.csail.mit.edu/2009/DHS-fusion/PrivacyAct/Privacy#>.
+
+########People and Information ###########
+:31_USC_3711e rdfs:subClassOf :Use;
+	rdfs:label "section 3711(e) of Title 31".
+	
+:44_USC_3103 rdfs:subClassOf :Use;
+	rdfs:label "section 3103 of 44 U.S.C.".
+	
+:access_procedures rdfs:subClassOf :Documentation;
+	##rule specific (Privacy Act e4)
+	##will have another place in full legal ontology
+	rdfs:label "Access Procedures";
+	rdfs:comment "the agency procedures whereby an individual can be notified at his request how he can gain access to any record pertaining to him contained in the system of records, and how he can contest its content".
+
+:Accounting rdfs:subClassOf :Data;
+	##distinguish from financial accounting/privacy later##
+	rdfs:label "Accounting of a Disclosure.";
+	rdfs:comment "the date, nature, and purpose of each disclosure of a record to any person or to another agency made under subsection (b) of this section; and the name and address of the person or agency to whom the disclosure is made.".
+	
+:Acknowledgment rdfs:subClassOf :Use;
+	rdfs:label "Acknowledgment";
+	rdfs:comment "Notification for the purpose of acknowledging something".
+	
+:adverse_determination rdfs:subClassOf :Use;
+	rdfs:label "Adverse Determination";
+	rdfs:comment "Decision with a negative impact on the subject".
+
+:Archivist_or_designee rdfs:subClassOf :National_Archives_Records_Admin;
+	rdfs:label "The Archivist or the designee of the Archivist.".
+	
+:Archivists_Evaluation rdfs:subClassOf :Use;
+	rdfs:label "Evaluation by the Archivist or his designee";
+	rdfs:comment "the determination if the record has value to be preserved by the U.S. government.".
+
+:address rdfs:subClassOf :Documentation;
+	rdfs:label "address".
+
+:authority rdfs:subClassOf :Documentation;
+	rdfs:subClassOf :Person;
+	rdfs:label "An Authority Figure";
+	rdfs:comment "the authority which authorizes the solicitation of information".
+
+:category_of_individuals rdfs:subClassOf :Documentation;
+	rdfs:label "Category of individuals";
+	rdfs:comment "category of individuals whose records are maintained in the system".
+	
+:category_of_records rdfs:subClassOf :Documentation;
+	rdfs:label "Category of records";
+	rdfs:comment "category of records maintained in the system".
+	
+:category_of_source rdfs:subClassOf :Documentation;
+	rdfs:label "Category of sources";
+	rdfs:comment "the categories of sources of records in the system".
+
+:Census rdfs:subClassOf :Use;
+	rdfs:label "Census";
+	rdfs:comment "is the information being given for the purposes of carrying out a census?".
+	
+:Census_Bureau rdfs:subClasOf :Party;
+	rdfs:label "Bureau of the Census".
+	
+:civil_action a rdfs:Class;
+	rdfs:label "A Civil Action or Proceeding.".
+
+:Consent rdfs:subClassOf :Requirement;
+	rdfs:comment "Written Consent of the subject of the information being exchanged.";
+	rdfs:label "Written Consent".
+	
+:Committee_on_Government_Operations rdfs:subClassOf :House_of_Representatives;
+	rdfs:label "House Committee on Government Operations".
+	
+:Committee_on_Governmental_Affairs rdfs:subClassOf :Senate;
+	rdfs:label "Senate Committee on Governmental Affairs".
+	
+:Comptroller_General_or_designee rdfs:subClassOf :Person;
+	rdfs:subClassOf :General_Accounting_Office;
+	rdfs:label "Comptroller General".
+	
+:compulsory_legal_process rdfs:subClassOf :Use;
+	rdfs:label "Compulsory Legal Process".
+
+:Consumer_Reporting_Agency rdfs:subClassOf :Party;
+	rdfs:label "Consumer Reporting Agency".
+
+:court_order rdfs:subClassOf :Requirement;
+	rdfs:label "Order from a court of competent jurisdiction.".
+	
+:Data a rdfs:Class;
+	rdfs:label "Data".
+
+:disclosure_notification rdfs:subClassOf :Requirement;
+	rdfs:label "Notification of Disclosure";
+	rdfs:comment "Notification of disclosure of information to the subject of that information".
+
+:Documentation a rdfs:Class;
+	rdfs:label "Information documenting some event".
+	
+:effects rdfs:subClassOf :Documentation;
+	rdfs:label "Effects";
+	rdfs:comment "effects of not providing the requested information".
+
+:US_Federal_Agency rdfs:subClassOf :Government_Agency;
+	rdfs:label "US Federal Government Agency".
+	
+:US_Federal_Register rdfs:subClassOf :Party;
+	rdfs:label "US Federal Register".
+
+:First_Amendment_Rights rdfs:subClassOf :Subject;
+	rdfs:label "First Amendment Rights";
+	rdfs:comment "individual exercising first amendment rights".
+
+:FOIA_5_USC_552 rdfs:subClassOf :Use;
+	rdfs:label "5 U.S.C. Section 552".
+
+:Government_Agency rdfs:subClassOf :Party;
+	rdfs:subClassOf :Party;
+	rdfs:label "Government Agency".
+	
+:health_safety rdfs:subClassOf :Use;
+	rdfs:label "Affecting Health and Safety";
+	rdfs:comment "information affects health or safety of an individual".
+
+:Historical_Record rdfs:subClassOf :Use;
+	rdfs:label "For use in a historical record";
+	rdfs:comment "record which has sufficient historical or other value to warrant its continued preservation by the United States Government".
+	
+:House_of_Representatives rdfs:subClassOf :US_Legislative_Body;
+	rdfs:label "United States House of Representatives".
+	
+:intended_purpose rdfs:subClassOf :Documentation;
+	rdfs:label "intended purpose of information collected".
+	
+:law_enforcement rdfs:subClassOf :Use;
+	rdfs:label "Authorized civil or criminal law enforcement activity".
+	
+:Legislative_Body rdfs:subClassOf :Party;
+	rdfs:comment "Senate or House Committees or SubCommittees.";
+	rdfs:label "Legislative Body".
+
+:location rdfs:subClassOf :Documentation;
+	rdfs:label "Location".
+	
+:MatchingAgreement a rdfs:Class;
+	rdfs:label "Matching Program".
+	
+:name rdfs:subClassOf :Documentation;
+	rdfs:label "Name of system of records".
+	
+:National_Archives_Records_Admin rdfs:subClassOf :US_Federal_Agency;
+	rdfs:label "The National Archives and Records Administration".
+
+:Need_to_Know rdfs:subClassOf :Use;
+	rdfs:label "Need to Know";
+	rdfs:comment "Does the requester need to know the information in order to perform his job?".
+
+:Not_II rdfs:subClassOf :Written_Assurance;
+	rdfs:label "Information in a form not Individually Identifiable.".
+	
+:notify_procedures rdfs:subClassOf :Documentation;
+	rdfs:label "Procedures for notification";
+	rdfs:comment "the agency procedures whereby an individual can be notified at his request if the system of records contains a record pertaining to him".
+	
+:Party a rdfs:Class;
+	rdfs:label "A Party Involved In a Transaction".
+
+:performance_of_duties rdfs:subClassOf :Use;
+	rdfs:label "in the course of the performance of one's duties".
+	
+:Person rdfs:subClassOf :Party;
+	rdfs:label "Individual Person";
+	rdfs:comment "Persons can receive information or be the subject of information".
+
+:PII rdfs:subClassOf :Data;
+	rdfs:label "Personally Identifiable Information".
+	
+:policies_and_practices rdfs:subClassOf :Documentation;
+	rdfs:label "Policies and Practices";
+	rdfs:comment "the policies and practices of the agency regarding storage, retrievability, access controls, retention, and disposal of the records".
+	
+:provisions_for_judicial_review rdfs:subClassOf :Documentation;
+	rdfs:label "Provisions for Judicial Review".
+	
+:Reasons_for_Exemption rdfs:subClassOf :statement;
+	rdfs:label "Reasons for Exemption".
+	
+:Refusal rdfs:subClassOf :Use;
+	rdfs:label "Notification of a refusal";
+	rdfs:comment "Notification of a refusal to alter a document or comply with a request".
+	
+:relevant_to_agency rdfs:subClassOf :Use;
+	rdfs:label "Information contained is relevant to the purpose of the agency".
+	
+:Requirement rdfs:subClassOf :Data;
+	rdfs:label "Additional Requirements";
+	rdfs:comment "Anything else required by the policy".
+
+:routine_use rdfs:subClassOf :Use;
+	rdfs:label "Routine Use";
+	rdfs:comment "means, with respect to the disclosure of a record, the use of such record for a purpose which is compatible with the purpose for which it was collected".
+
+:routine_uses rdfs:subClassOf :Documentation;
+	rdfs:label "Routine Uses";
+	rdfs:comment "routine uses information in a system of records can be used for".
+	
+:Senate rdfs:subClassOf :US_Legislative_Body;
+	rdfs:label "The United States Senate".
+
+:State_Agency rdfs:subClassOf :Government_Agency;
+	rdfs:label "State Agency".
+
+:statement rdfs:subClassOf :Data;
+	rdfs:label "Statement";
+	rdfs:comment "any written statement.".
+
+:Stats_Research rdfs:subClassOf :Use;
+	rdfs:label "Used for statistics only".
+	
+:Stats_Only rdfs:subClassOf :Written_Assurance;
+	rdfs:label "Written Assurance that something is used for statistical purposes only";
+	rdfs:comment "This document will be used only for statistical purposes and recording".
+	
+:Subject a rdfs:Class;
+	rdfs:label "Subject of information";
+	rdfs:comment "subject of information in a system of records".
+
+:System_of_Records rdfs:subClassOf :Data;
+	rdfs:label "System of Records".
+	
+:title_and_address rdfs:subClassOf :Documentation;
+	rdfs:label "title and address";
+	rdfs:comment "the title and business address of the agency official who is responsible for the system of records".
+	
+:US_Legislative_Body rdfs:subClassOf :Legislative_Body;
+	rdfs:label "US Legislative Body".
+	
+:US_Person rdfs:subClassOf :Person;
+	rdfs:label "US Person".
+	
+:Use a rdfs:Class;
+	rdfs:label "Purpose of Information transfer";
+	rdfs:comment "the use of the information that is being given from sender to requester".
+	
+:within_jurisdiction rdfs:subClassOf :Requirement;
+	rdfs:label "extent of matter within jurisdiction".
+	
+:Written_Assurance rdfs:subClassOf :Requirement;
+	rdfs:label "Written Assurance of some compliance".
+	
+:Written_Consent rdfs:subClassOf :Consent;
+	rdfs:label "Written Consent".
+	
+:Written_Request rdfs:subClassOf :Requirement;
+	rdfs:label "written request to send/receive information.";
+	rdfs:comment "specifying portion desired, activity for which record sought".
+
+:about a rdf:Property;
+	rdfs:label "about";
+	rdfs:domain :Data.
+	
+:authorized a rdf:Property;
+	rdfs:label "authorized";
+	rdfs:domain :Data;
+	rdfs:range :Subject.
+
+:contained_in a rdf:Property;
+	rdfs:label "contained in";
+	rdfs:domain :Data;
+	rdfs:comment "where is the information kept".
+
+:disagree_with a rdf:Property;
+	rdfs:label "disagree with";
+	rdfs:domain :statement;
+	rdfs:range :Data.
+	
+:employedBy a owl:TransitiveProperty;
+	rdfs:label "employed by";
+	rdfs:domain :Party;
+	rdfs:Range :Party.
+	
+:fair_to a rdf:Property;
+	rdfs:label "fair to";
+	rdfs:domain :Data;
+	rdfs:range :Person.
+	
+:headOf a rdf:Property;
+	rdfs:label "head of";
+	rdfs:domain :Party;
+	rdfs:range:Party.
+	
+:maintains a rdf:Property;
+	rdfs:label "maintains";
+	rdfs:range :System_of_Records.
+	
+:matching_program a owl:SymmetricProperty;
+	rdfs:label "Matching Program";
+	rdfs:comment "Agencies are involved in a matching program with each other";
+	rdfs:domain "Government Agency";
+	rdfs:range "Government Agency".
+	
+:of a rdf:Property;
+	rdfs:label "of".
+		
+:purpose a rdf:Property;
+	rdfs:label "purpose";
+	rdfs:domain :Data;
+	rdfs:range :Use;
+	rdfs:comment "purpose of information being stored".
+
+:record_of a rdf:Property;
+	rdfs:label "record of";
+	rdfs:domain :Accounting;
+	rdfs:range :Share.
+	
+:specifically_authorized rdfs:subPropertyOf :authorized;
+	rdfs:label "specifically authorized by law".
+	
+:source a rdf:Property;
+	rdfs:label "source";
+	rdfs:domain :Data;
+	rdfs:label "source of information".
+	
+:used_in a rdf:Property;
+	rdfs:label "used in";
+	rdfs:domain :Data.
+
+########Events#########
+:Change rdfs:subClassOf :Event;
+	rdfs:label "Change a document".
+	
+:Event a rdfs:Class;
+	rdfs:label "Event";
+	rdfs:comment "an event occurs in the log".
+
+:File rdfs:subClassOf :Event;
+	rdfs:label "File report/complaint/etc. in writing";
+	rdfs:comment "file something in writing to an agency or organization".
+
+:Info_Request rdfs:subClassOf :Request;
+	rdfs:label "request for information";
+	rdfs:comment "request information from a person/agency for use in a system of records".
+	
+:MakePublic rdfs:subClassOf :Share;
+	rdfs:label "Share with the Public".
+	
+:Notify rdfs:subClassOf :Event;
+	rdfs:label "Notification of some event.".
+	
+:RentSell rdfs:subClassOf :Share;
+	rdfs:label "Rent or Sell".
+
+:Request rdfs:subClassOf :Event;
+	rdfs:label "Request of sharing".
+
+:Request_Change rdfs:subClassOf :Event;
+	rdfs:label "Request a change";
+	rdfs:comment "Request a change to information stored in a system of records".
+
+:Review rdfs:subClassOf :Event;
+	rdfs:label "Review of a previous decision".
+	
+:Revision_or_Establish rdfs:subClassOf :Event;
+	rdfs:label "Revising or Establishing a System of Records".
+
+:Share rdfs:subClassOf :Event;
+	rdfs:label "Sharing of information";
+	rdfs:comment "the act of sharing information from one party to another".
+
+:antecedent a owl:TransitiveProperty;
+	rdfs:label "antecedent";
+	rdfs:domain :Event;
+	rdfs:range :Event;
+	rdfs:comment "A pri:antecedent B means A happens before B".
+	
+:by a rdf:Property;
+	rdfs:label "by";
+	rdfs:domain :Event;
+	rdfs:range :Party;
+	rdfs:comment "person who sends information".
+	
+:contains a rdf:Property;
+	rdfs:label "contains";
+	rdfs:domain :Event;
+	rdfs:comment "other things contained in a form documenting an event".
+	
+:data a rdf:Property;
+	rdfs:label "data";
+	rdfs:domain :Event;
+	rdfs:comment "the data/document/other thing being shared".
+	
+:purpose a rdf:Property;
+	rdfs:label "purpose";
+	rdfs:domain :Event;
+	rdfs:range :Use;
+	rdfs:comment "purpose of information transfer".
+	
+:to a rdf:Property;
+	rdfs:label "to";
+	rdfs:domain :Event;
+	rdfs:range :Party;
+	rdfs:comment "person who receives information".

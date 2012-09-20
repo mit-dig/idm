@@ -1,0 +1,135 @@
+#
+# DHS Fusion Ontology
+#
+# Contains important entities that are common across all use of the DHS reasoner:
+#
+# Envelope: The pieces of a transaction: :by, :to, :data, :doc-data
+#
+# Universals: Entities considered universal to all jurisdictions:
+# :convicted_pursuant, :sentenced_pursuant, :Current_Date
+#
+# FOAF: Important classes and properties recorded in FOAF files of interest to fusion:
+# :Function, :affiliation, :authorized_purpose, job_title, organization_type
+#
+# Glue: The way the log file generator enables the reasoner to find what it needs:
+# :transaction_ontology
+#
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix foaf:  <http://xmlns.com/foaf/0.1/>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+
+
+# Envelope
+#
+# Common across all uses and jurisdictions.
+# Expected not to require unique local definitions.
+#
+
+:Party
+    a rdfs:Class;
+    rdfs:label "A party involved in a transaction".
+
+:sender
+    rdfs:label "Sender";
+    rdfs:subClassOf foaf:Person. 
+
+:receiver
+    rdfs:label
+        "Receiver";
+    rdfs:subClassOf foaf:Person.
+
+:document
+    rdfs:label "Document";
+    rdfs:subClassOf r:resource.
+
+:Event 
+    a rdfs:Class; 
+    rdfs:comment "an unit of activity";
+    rdfs:label "Event".
+
+:Disseminate
+    rdfs:comment "the act of sharing information from one party to another";
+    rdfs:label "Disseminate information";
+    rdfs:subClassOf fusion:Event.
+
+:doc-data
+    a r:Property;
+    rdfs:comment "metadata extract from data being shared";
+    rdfs:domain fusion:Event;
+    rdfs:label "parsed document data".
+
+:data
+    a r:Property;
+    rdfs:comment "the data being shared";
+    rdfs:domain fusion:Event;
+    rdfs:label "data".
+
+:Information
+    rdfs:label "Information";
+    rdfs:subClassOf fusion:data.
+
+:by
+    a r:Property;
+    rdfs:comment "person who sends information";
+    rdfs:domain fusion:Event;
+    rdfs:label "by";
+    rdfs:range fusion:Party.
+
+:to
+    a r:Property;
+    rdfs:comment "person who receives information";
+    rdfs:domain fusion:Event;
+    rdfs:label "to";
+    rdfs:range fusion:Party.
+
+:based_upon
+    a r:Property;
+    rdfs:label "based upon";
+    rdfs:domain fusion:data.
+
+:Current_Date
+    a rdfs:Class;
+    rdfs:label "##-##-####".
+
+# Universals
+
+:convicted_pursuant
+    a r:Property;
+    rdfs:label "convicted pursuant".
+
+:sentenced_pursuant
+    a r:Property;
+    rdfs:label "sentenced pursuant".
+
+# FOAF
+
+:job_title
+    a r:Property;
+    rdfs:label "job title".
+
+:organization
+    a r:Property;
+    rdfs:label "organizational affiliation".
+
+:organization_type
+    a r:Property;
+    rdfs:label "organization_type".
+
+:affiliation
+    a r:Property;
+    rdfs:comment "agency to which this person is affiliated";
+    rdfs:label "affiliation".
+
+:Function
+    a rdfs:Class;
+    rdfs:label "Agency Function".
+
+#Glue
+
+:transaction_ontology
+     a r:Property;
+     rdfs:comment "The transaction ontology that the log generator prepends to Envelope statements.";
+     rdfs:label "Transaction Ontology".

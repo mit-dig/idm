@@ -1,0 +1,21 @@
+#
+# List of organizations that the Criminal History Systems Board qualifies for access to
+# criminal offender record information.
+#
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_Board_Certified#>.
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
+
+<> rdfs:label "Organizations certified by the Massachusetts Criminal History Systems Board as qualified for access to criminal offender record information".
+
+:Board_Certified
+	foaf:Organization <http://dig.csail.mit.edu/2010/DHS-fusion/FL/profiles/FDLE.org#me>;
+	foaf:Organization <http://dig.csail.mit.edu/2010/DHS-fusion/MD/profiles/BaltimorePoliceDept.org#me>;
+	foaf:Organization <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/CommonwealthFusionCenter.org#me>;
+	foaf:Organization <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/DHS_ICE.org#me>.
+
+

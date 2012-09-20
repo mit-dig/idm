@@ -1,0 +1,93 @@
+@prefix air: <http://dig.csail.mit.edu/TAMI/2007/amord/air#>.
+@prefix fusion: <http://dig.csail.mit.edu/2010/DHS-fusion/common/fusion_ONT#>.
+@prefix : <http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy#>.
+@prefix idmtxn: <http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy_ONT#>.
+@prefix idm:  <urn:test:idmanagement.gov:icam:attribute:v1:>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+
+@forAll :S, :R, :SENDER, :RECEIVER, :ORG, :EVENT, :GN_SENDER, :GN_RECEIVER, :ORG.
+
+:IdMTestingPolicy a air:Policy;
+    air:rule :SenderReceiverBindingRule;
+    fusion:transaction_ontology "http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy_ONT".
+
+:SenderReceiverBindingRule a air:Belief-rule;
+    air:if {
+    	:EVENT idmtxn:by :S.
+    	:EVENT idmtxn:to :R.
+        :S log:semantics :SENDER.
+        :R log:semantics :RECEIVER.
+    };
+    air:then [
+        air:rule :SameOrganizationRule ;
+    ].
+
+:SameOrganizationRule a air:Belief-rule;
+    air:if {
+        # NOTE: Won't work if :S/:R have no given names!
+        @forSome :GN_SENDER, :GN_RECEIVER, :ORG.
+        :SENDER log:includes {
+            :S idm:givenName :GN_SENDER;
+               idm:organizationName :ORG.
+        }.
+        :RECEIVER log:includes {
+            :R idm:givenName :GN_RECEIVER;
+               idm:organizationName :ORG.
+        }.
+    };
+    air:then [
+	air:rule :SameOrganizationBindingRule;
+    ];
+    air:else [
+        air:description (:S " and " :R " are not both members of the same organization");
+	air:assert [air:statement {:EVENT air:non-compliant-with :IdMTestingPolicy.}];
+    ].
+
+:SameOrganizationBindingRule a air:Belief-rule;
+    air:if {
+        :SENDER log:includes {
+            :S idm:givenName :GN_SENDER;
+               idm:organizationName :ORG.
+        }.
+        :RECEIVER log:includes {
+            :R idm:givenName :GN_RECEIVER;
+               idm:organizationName :ORG.
+        }.
+    };
+    air:then [
+        air:description (:GN_SENDER " and " :GN_RECEIVER " are both members of the same organization, " :ORG);
+	air:rule :CORule;
+    ].
+
+:CORule a air:Belief-rule ;
+    air:if {
+    	:SENDER log:includes {
+	    :S idm:designatedRole "Commanding Officer".
+	}.
+    };
+    air:then [
+        air:description (:GN_SENDER " is the commanding officer and can request information from anyone in the same organization");
+	air:assert [air:statement {:EVENT air:compliant-with :IdMTestingPolicy.}];
+    ];
+    air:else [
+        air:description (:GN_SENDER " is not a commanding officer");
+        air:rule :ChiefEngineerRule;
+    ].
+
+:ChiefEngineerRule a air:Belief-rule ;
+    air:if {
+    	:SENDER log:includes {
+	    :S idm:designatedRole "Chief Engineer".
+	}.
+    	:RECEIVER log:includes {
+	    :R idm:organizationUnitName "Engineering".
+	}.
+    };
+    air:then [
+        air:description (:GN_SENDER " is a chief engineer and is sending to a receiver in Engineering.");
+	air:assert [air:statement {:EVENT air:compliant-with :IdMTestingPolicy.}]
+    ];
+    air:else [
+        air:description (:GN_SENDER " is not a chief engineer or is sending to a receiver not in Engineering");
+	air:assert [air:statement {:EVENT air:non-compliant-with :IdMTestingPolicy.}];
+    ].

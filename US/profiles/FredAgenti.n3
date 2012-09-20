@@ -1,0 +1,53 @@
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/FredAgenti#>.
+@prefix foaf:  <http://xmlns.com/foaf/0.1/>.
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix con: <http://www.w3.org/2000/10/swap/pim/contact#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT#>.
+@prefix core10: <http://dig.csail.mit.edu/2012/DHS/JHU/core10/core10_ONT#>.
+@prefix pri: <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/5_USC_552a_ONT#>.
+
+# KKW edited to create the JHU demo
+
+<> dc:title "Feddy Agenti's User Profile";
+   a foaf:PersonalProfileDocument;
+   foaf:maker <#me>;
+    rdfs:seeAlso
+       "http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT.n3";
+    rdfs:seeAlso
+       "http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/5_USC_552a_ONT.n3";
+   foaf:primaryTopic <#me> .	
+
+<#me> a con:Male, foaf:Person; 
+      rdfs:label "Feddy Agenti";
+      con:office 
+      		 [con:address 
+		 	      [con:city "New York";
+			       con:state "NY";
+			       con:country "USA";
+			       con:postalcode "10001";
+			       con:street "601 W 26th St, 2d floor"]];
+     geo:lat "40.7532";
+     geo:long "-74.0007";			       			       
+     foaf:family_name "Agenti";
+     foaf:given_name "Fred";
+     foaf:middle_name "Ral";
+     foaf:name "Fred Agenti";
+     foaf:img <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/generic_man.jpg>;
+     foaf:mbox <mailto:fed@dhs.us.gov>;
+     foaf:mbox_sha1sum "62566bac267e5ab3bcb8b16a92810741e9377ebd";
+     foaf:nick "Feddy";
+     foaf:job_tile "Special_Agent";
+     core10:affiliation core10:Criminal_Justice_Agency;
+     fusion:authorized_purpose dhs:apprehension;
+     foaf:member <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/DHS_ICE.org#me>;
+     foaf:organization "Department of Homeland Security";
+     foaf:sub_organization "Immigrations and Customs Enforcement";
+     foaf:organization_type dhs:Special_Agent;
+     foaf:government_type pri:US_Federal_Agency;
+#     foaf:government_type "US";
+     pri:maintains <http://dig.csail.mit.edu/2012/DHS/JHU/US/documents/Fake_System_of_Records.html>;
+     foaf:organization_Homepage <http://www.ice.gov/>.

@@ -1,0 +1,237 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+:Party
+   a rdfs:Class;
+   rdfs:label
+      "A party involved in a transaction".
+
+:sender
+   rdfs:label
+      "Sender";
+   rdfs:subClassOf foaf:Person. 
+
+:receiver
+   rdfs:label
+      "Receiver";
+   rdfs:subClassOf foaf:Person.
+
+:document
+   rdfs:label
+      "Document";
+   rdfs:subClassOf r:resource.
+
+#####Actors#####
+:MA_Executive_Branch
+   rdfs:label
+      "MA, Executive Branch";
+   rdfs:subClassOf mglcja:Party.
+:The_Board
+   rdfs:label
+      "The Board";
+   rdfs:subClassOf mglcja:Party.
+
+#####Recipients#####
+:Criminal_Justice_Agency
+   rdfs:label
+      "Criminal Justice Agency";
+   rdfs:subClassOf mglcja:Agency.
+:Agency_Required_by_Statute
+   rdfs:label
+      "Agency Required by Statute";
+   rdfs:comment
+      "Such other agencies and individuals required to have access to such information by statute including United States Armed Forces recruiting offices";
+   rdfs:subClassOf mglcja:Agency.
+:Agency_Performing_Public_Service
+   rdfs:label
+      "Agency Performing a Public Service";
+   rdfs:comment
+      "Any other agencies and individuals where it has been determined that the public interest in disseminating such information to these parties clearly outweighs the interest in security and privacy";
+   rdfs:subClassOf mglcja:Agency.
+:Agency
+   rdfs:label
+      "An Agency or the Executive Branch of the Government";
+   rdfs:subClassOf mglcja:Party;
+   rdfs:comment
+      "any agency of the executive branch of the government, including but not limited to any constitutional or other office, executive office, department, division, bureau, board, commission or committee thereof; or any authority created by the general court to serve a public purpose, having either statewide or local jurisdiction.".
+
+:Information
+   rdfs:label
+      "Information";
+   rdfs:subClassOf
+      mglcja:data.
+
+:Event 
+   a rdfs:Class; 
+   rdfs:comment 
+      "an event occurs in the log";
+   rdfs:label 
+      "Event".
+:by
+   a   r:Property;
+   rdfs:comment
+      "person who sends information";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "by";
+   rdfs:range
+      mglcja:Party.
+
+:data
+   a   r:Property;
+   rdfs:comment
+      "the data being shared";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "data".
+
+:to
+   a   r:Property;
+   rdfs:comment
+      "person who receives information";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "to";
+   rdfs:range
+      mglcja:Party.
+
+#####Duties#####
+:Duty
+   a   rdfs:Class;
+   rdfs:label "Duty";
+   rdfs:comment "statutory duty".
+
+:Criminal_Justice_Duties
+   rdfs:subClassOf mglcja:Duty;
+   rdfs:label "Criminal Justice Duties";
+   rdfs:comment "criminal justice duties of a criminal justice agency (receiving information)".
+
+:personal_characteristics
+   a   r:Property;
+   rdfs:comment 
+      "name, fingerprints, or other personal identifying characteristics";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "personally identifying information";
+   rdfs:range
+      mglcja:Information.
+
+:personal_information
+   a   r:Property;
+   rdfs:comment 
+      "identifies family members, friends, medical or psychological history, or any other personal information";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "personal information";
+   rdfs:range
+      mglcja:Information.
+
+:subject_name
+   rdfs:subPropertyOf mglcja:personal_characteristics;
+   rdfs:comment "Name of the person who is the subject of inquiry";
+   rdfs:label "Name".
+
+:subject_fingerprints
+   rdfs:subPropertyOf mglcja:personal_characteristics;
+   rdfs:comment "Fingerprints of the person who is the subject of inquiry";
+   rdfs:label "fingerprints".
+
+:subject_other
+   rdfs:subPropertyOf mglcja:personal_characteristics;
+   rdfs:comment "Other personally identifiable characteristics of the person who is the subject of inquiry";
+   rdfs:label "Other".
+ 
+:Categories_or_Data
+   a   r:Property;
+   rdfs:comment "categories of offense or data elements other than said personal identifying characteristics";
+   rdfs:domain
+      mglcja:Event;
+   rdfs:label
+      "Categories of Offense or Other Personal Data Elements";
+   rdfs:range
+      mglcja:Information.
+
+:maintained_by
+   a   r:Property;
+   rdfs:label "maintained by";
+   rdfs:comment "maintained in a standardized format in its automated criminal history file by";
+   rdfs:domain
+      mglcja:data.
+
+:principle_function
+   a   r:Property;
+   rdfs:label
+      " whose principle function is ";
+   rdfs:domain
+      mglcja:Event.
+
+:primary_function
+   a   r:Property;
+   rdfs:label
+      " whose primary function is ";
+   rdfs:domain
+      mglcja:Event.
+
+:Function
+   a   rdfs:Class;
+   rdfs:label
+      "Agency Function".
+
+:apprehension
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "apprehension of criminal offenders". 
+
+:prosecution
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "prosecution of criminal offenders". 
+
+:defense
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "defense of criminal offenders". 
+
+:adjudication
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "adjudication of criminal offenders". 
+
+:incarceration
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "incarceration of criminal offenders". 
+
+:rehabilitation
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "rehabilitation of criminal offenders". 
+
+:collection
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "collection of criminal offender record information".
+
+:storage
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "storage of criminal offender record information".
+
+:dissemination
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "dissemination of criminal offender record information".
+
+:usage
+   rdfs:subClassOf mglcja:Function;
+   rdfs:label
+      "usage of criminal offender record information".
+

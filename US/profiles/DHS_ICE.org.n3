@@ -1,0 +1,59 @@
+@prefix rsa: <http://www.w3.org/ns/auth/rsa#>.
+@prefix cert: <http://www.w3.org/ns/auth/cert#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix con: <http://www.w3.org/2000/10/swap/pim/contact#>.
+@prefix s: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix doap: <http://usefulinc.com/ns/doap#>.
+
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/DHS_ICE.org#>.
+
+<>
+     dc:title
+       "DHS Immigration and Customs Enforcement";
+    rdfs:seeAlso
+       "http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT.n3";
+    foaf:maker
+       <#me>;
+    foaf:primaryTopic
+       <#me>.
+<#me>
+    a    foaf:Organization;
+    rdfs:label
+       "DHS Immigration and Customs Enforcement";
+    con:office
+            [ con:address
+                    [ con:city
+                       "New York";
+                    con:country
+                       "USA";
+                    con:postalCode
+                       "10001";
+		    con:state
+			"NY";
+                    con:street
+                       "601 W 26th St, 2d floor" ]]; 
+		    geo:lat
+               	        "40.7532";
+            	    geo:long
+               	        "-74.0007";
+    foaf:office_near
+       [ geo:lat "40.7532"; geo:long "-74.0007" ];
+    foaf:img
+       <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/ice_print_logo.gif>;
+    foaf:mbox
+       <mailto:bogus@ice.dhs.us.gov>;
+    foaf:mbox_sha1sum
+       "78abffae8bfaafaf48f7c71a86c0cde396abe516";
+    foaf:name
+       "DHS Immigration and Customs Enforcement";
+    fusion:authorized_purpose dhs:enforcement;
+    foaf:nick
+       "DHS ICE";
+    foaf:workplaceHomepage
+       <http://www.ice.gov>.

@@ -1,0 +1,56 @@
+var files = {
+    type:"json",
+    opts: {
+      static: [
+        { 
+          attributes:{ rel:"group" },
+          data: { title:"Fusion" },
+          state:"closed",
+          children:[
+            {
+              attributes:{ rel:"folder" },
+              data: { title:"Analysa" },
+              children:[
+                {
+                  attributes:{ rel:"folder" },
+                  data: { title:"RFI"},
+                  children:[
+                          {
+                          attributes:{ rel:"file" },
+                          data: { title:"RBGuy",
+                          attributes:{ href:"http://dice.csail.mit.edu/2012/JHU/MA/documents/Fake_MA_Request.pdf" }
+                          	}
+                          },
+                          ]
+               },
+             ]
+            },
+//             {
+//              attributes:{ rel:"folder" },
+//              data: { title:"Copp" },
+//              children:[
+//                {
+//                  attributes:{ rel:"folder" },
+//                  data: { title:"Replies"},
+//                  children:[
+//                          {
+//                          attributes:{ rel:"file" },
+//                          data: { title:"ToMia",
+//                          attributes:{ href:"http://dig.csail.mit.edu/2010/DHS-fusion/MD/documents/Fake_MD_Response.pdf" }
+//                          	}
+//                          },
+//			  {
+//                          attributes:{ rel:"file" },
+//                          data: { title:"ToMiaCore",
+//                          attributes:{ href:"http://dig.csail.mit.edu/2010/DHS-fusion/MD/documents/Fake_MD_Response_core10.pdf" }
+//                          	}
+//                          },
+//                          ]
+//               },
+//             ]
+//            },
+           ]
+         }
+      ]
+    }
+  }

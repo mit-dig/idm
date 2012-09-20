@@ -1,0 +1,53 @@
+# $Date:  $
+# $Revision:  $
+# $Author:  $
+# KKW modified in 2012 for JHU test
+
+
+# Cross Ontology assertions for Massachusetts Jurisdiction.
+# Currently supports:
+# US/DHS
+# Maryland
+# Florida
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix air: <http://dig.csail.mit.edu/TAMI/2007/amord/air#>.
+
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs#> .
+
+@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
+@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT#> .
+@prefix mdccl: <http://dig.csail.mit.edu/2012/DHS-fusion/MD/rules/MdCodeComLaw_12_15_01_03_ONT#> .
+@prefix fdle: <http://dig.csail.mit.edu/2012/DHS-fusion/FL/rules/fl_ONT#> .
+
+<> rdfs:label "Massachusetts Cross Ontology Assertions".
+
+# US/DHS Relations
+
+dhs:apprehension owl:sameAs mgl:apprehension.
+dhs:apprehension owl:sameAs mglcja:apprehension.
+dhs:enforcement owl:sameAs mglcja:usage.
+dhs:investigation owl:sameAs mglcja:collection.
+dhs:Function owl:sameAs mgl:Function.
+
+# Maryland Relations
+
+mdccl:arrest owl:sameAs mgl:apprehension.
+mdccl:arrest owl:sameAs mglcja:apprehension.
+mdccl:Function owl:sameAs mgl:Function.
+mdccl:Criminal_History_Record_Information owl:sameAs mgl:Criminal_Offender_Record_Information.
+mdccl:convicted_pursuant owl:sameAs mgl:convicted_pursuant.
+mdccl:sentenced_pursuant owl:sameAs mgl:sentenced_pursuant.
+mdccl:maximum_allowable_sentence_length owl:sameAs mgl:maximum_allowable_sentence_length.
+mdccl:sentence_imposed owl:sameAs mgl:sentence_imposed.
+mdccl:has_custody_status owl:sameAs mgl:has_custody_status.
+mdccl:Parole owl:sameAs mgl:Parole.
+
+# Florida Relations
+
+fdle:apprehension owl:sameAs mglcja:apprehension.
+fdle:apprehension owl:sameAs mgl:apprehension.
+fdle:Function owl:sameAs mgl:Function.

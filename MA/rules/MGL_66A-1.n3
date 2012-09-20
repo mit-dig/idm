@@ -1,0 +1,169 @@
+# $Date: $
+# $Revision: $
+# $Author: wdc $
+
+# by William D. Cattey
+# Policy file for MGL 66A-1: Identify Criminal Justice Agency Affiliation if any.
+# Revised by KKW in 2012 to create JHU test version
+
+@prefix foaf:  <http://xmlns.com/foaf/0.1/>.
+@prefix air: <http://dig.csail.mit.edu/TAMI/2007/amord/air#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+
+@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/DHS/rules/dhs_ONT#>.
+
+@forAll :P, :PARTY, :FUNCTION.
+
+:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3".
+:MGL_Ann_6_172 fusion:transaction_ontology "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT".
+
+:MGL_Ann_66A-1 a air:Policy;
+    air:rule :MGL_66A-1_Function;				# Set up tests for Criminal Justice agencies.
+    air:rule :MGL_66A-1_init;
+    rdfs:comment "Dissemination of record information; certification; eligibility for access; scope of inquiry; listing; access limited; rules; use of information";
+    rdfs:label "Massachusetts General Law, Part I, Title II, Chapter 66, Section a".
+
+
+# This is necessary as a separate rule because, after we extract the fusion:authorized_purpose
+# using log:includes, we must assert it as a truth in order to reason about it later.
+# Currently that is the only way to then do a cross-ontology test where we include
+# information into the knowledge base that says a function in one ontology is the same
+# as a function in another.
+
+:MGL_66A-1_Function a air:Belief-rule;
+    rdfs:comment "Compute our agency affiliation.";
+    air:if {
+        :P a mglcja:Party.
+	:P log:semantics :PARTY.
+
+        :PARTY log:includes {:P fusion:authorized_purpose :FUNCTION. }.
+    };
+    air:then [ 
+	air:description (  :P " performs function " :FUNCTION ".");
+	air:assert [air:statement {:P fusion:authorized_purpose :FUNCTION.} ]
+    ].
+
+# Chapter 66A: Section 1. Definitions
+#
+# “Criminal justice agency”, an agency at any level of government which performs as its principal function
+# activity relating to
+# (a) the apprehension, prosecution, defense, adjudication, incarceration, or rehabilitation of criminal offenders; or 
+# (b) the collection, storage, dissemination, or usage of criminal offender record information.
+
+:MGL_66A-1_init a air:Belief-rule;
+    air:if {
+        :P a mglcja:Party.
+        :P fusion:authorized_purpose :FUNCTION.
+    };
+    air:then [air:rule :MGL_66A-1_apprehension ].
+
+:MGL_66A-1_apprehension a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:apprehension.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- apprehension of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_prosecution ].
+
+:MGL_66A-1_prosecution a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:prosecution.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- prosecution of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_defense ].
+
+:MGL_66A-1_defense a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:defense.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- defense of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_adjudication ].
+
+:MGL_66A-1_adjudication a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:adjudication.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- adjudication of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_incarceration ].
+
+:MGL_66A-1_incarceration a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:incarceration.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- incarceration of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_rehabilitation ].
+
+:MGL_66A-1_rehabilitation a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:rehabilitation.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- rehabilitation of criminal offenders, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_collection ].
+
+:MGL_66A-1_collection a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:collection.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- collection of criminal offender record information, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_dissemination ].
+
+:MGL_66A-1_dissemination a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:dissemination.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- dissemination of criminal offender record information, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_storage ].
+
+:MGL_66A-1_storage a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:storage.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- storage of criminal offender record information, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+    	air:rule :MGL_66A-1_usage ].
+
+:MGL_66A-1_usage a air:Belief-rule;
+    air:if {
+	:FUNCTION owl:sameAs mglcja:usage.
+    };
+    air:then [
+        air:description ( :P " performs " :FUNCTION " -- usage of criminal offender record information, an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:compliant-with :MGL_Ann_66A-1.}]];
+    air:else [
+        air:description ( :P " Does not perform an MGL 66A-1 compliant primary function.");
+	air:assert [air:statement {:P air:non-compliant-with :MGL_Ann_66A-1.}]
+    	 ].

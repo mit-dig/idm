@@ -1,0 +1,62 @@
+@prefix rsa: <http://www.w3.org/ns/auth/rsa#>.
+@prefix cert: <http://www.w3.org/ns/auth/cert#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix con: <http://www.w3.org/2000/10/swap/pim/contact#>.
+@prefix s: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix doap: <http://usefulinc.com/ns/doap#>.
+
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/CommonwealthFusionCenter.org#>.
+
+# KKW edited the URIs for the JHU test.  
+# Also put in new URL for Fusion Center homepage.
+
+<>
+     dc:title
+       "Commonwealth Fusion Center";
+    rdfs:seeAlso
+       "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3";
+    foaf:maker
+       <#me>;
+    foaf:primaryTopic
+       <#me>.
+<#me>
+    a    foaf:Organization;
+    rdfs:label
+       "Commonwealth Fusion Center";
+    con:office
+            [ con:address
+                    [ con:city
+                       "Maynard";
+                    con:country
+                       "USA";
+                    con:postalCode
+                       "01754";
+		    con:state
+			"MA";
+                    con:street
+                       "124 Acton Street" ]]; 
+		    geo:lat
+               	        "42.451011";
+            	    geo:long
+               	        "-71.450443";
+    foaf:office_near
+       [ geo:lat "42.451011"; geo:long "-71.450443" ];
+    foaf:img
+       <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/commonwealth-fusion-center.jpg>;
+    foaf:mbox
+       <mailto:fusion-bogus@not-pol.state.ma.us>;
+    foaf:mbox_sha1sum
+       "868fdcfed3b2df2567268994cd4ab0604d11de1a";
+    foaf:name
+       "Commonwealth Fusion Center";
+    fusion:authorized_purpose mglcja:usage;
+    foaf:nick
+       "Fusion Center";
+    foaf:workplaceHomepage
+       <http://www.mass.gov/eopss/home-sec-emerg-resp/fusion-center/fusion-center-overview.html>.

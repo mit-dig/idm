@@ -1,0 +1,77 @@
+@prefix air: <http://dig.csail.mit.edu/TAMI/2007/amord/air#>.
+@prefix fusion: <http://dig.csail.mit.edu/2010/DHS-fusion/common/fusion_ONT#>.
+@prefix : <http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy#>.
+@prefix idmtxn: <http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy_ONT#>.
+@prefix idm:  <urn:test:idmanagement.gov:icam:attribute:v1:>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+
+@forAll :S, :R, :SENDER, :RECEIVER, :ORG, :EVENT.
+
+:IdMTestingPolicy a air:Policy;
+    air:rule :OrgHierarchyRule;
+    fusion:transaction_ontology "http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy_ONT".
+
+:OrgHierarchyRule a air:Belief-rule;
+    air:if {
+    	:EVENT idmtxn:by :S.
+    	:EVENT idmtxn:to :R.
+        :S log:semantics :SENDER.
+        :R log:semantics :RECEIVER.
+    	:SENDER log:includes {
+            :S idm:organizationName :ORG.
+	}.
+    	:RECEIVER log:includes {
+	    :R idm:organizationName :ORG.
+	}.
+    };
+    air:then [
+        air:rule :EngineeringAuthorityRule ;
+        air:description (:S " and " :R " are both members of the same organization, " :ORG)
+    ];
+    air:else [
+	air:assert [air:statement {:EVENT air:non-compliant-with :IdMTestingPolicy.}]].
+    ].
+
+:EngineeringAuthorityRule a air:Belief-rule ;
+    air:if {
+    	:RECEIVER log:includes {
+	    :R idm:organizationUnitName "Engineering".
+	}.
+    };
+    air:then [
+        air:description (:R " is a member of the engineering department");
+	air:rule :COEngineeringAuthorityRule;
+    ];
+    air:else [
+        air:description (:R " is not a member of the engineering department");
+	air:assert [air:statement {:EVENT air:non-compliant-with :IdMTestingPolicy.}]].
+    ].
+
+:COEngineeringAuthorityRule a air:Belief-rule ;
+    air:if {
+    	:SENDER log:includes {
+	    :S idm:designatedRole "Commanding Officer".
+	}.
+    };
+    air:then [
+        air:description (:S " is a commanding officer");
+	air:assert [air:statement {:EVENT air:compliant-with :IdMTestingPolicy.}]].
+    ];
+    air:else [
+	air:rule :ChiefEngineerEngineeringAuthorityRule.
+    ].
+
+:ChiefEngineerEngineeringAuthorityRule a air:Belief-rule ;
+    air:if {
+    	:SENDER log:includes {
+	    :S idm:designatedRole "Chief Engineer".
+	}.
+    };
+    air:then [
+        air:description (:S " is a chief engineer");
+	air:assert [air:statement {:EVENT air:compliant-with :IdMTestingPolicy.}]].
+    ];
+    air:else [
+        air:description (:S " is neither a commanding officer nor a chief engineer");
+	air:assert [air:statement {:EVENT air:non-compliant-with :IdMTestingPolicy.}]].
+    ].

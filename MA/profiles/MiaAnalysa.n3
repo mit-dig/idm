@@ -1,0 +1,94 @@
+@prefix rsa: <http://www.w3.org/ns/auth/rsa#>.
+@prefix cert: <http://www.w3.org/ns/auth/cert#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix con: <http://www.w3.org/2000/10/swap/pim/contact#>.
+@prefix s: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix doap: <http://usefulinc.com/ns/doap#>.
+
+@prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
+@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/MiaAnalysa#>.
+
+<>
+     dc:title
+       "Mia Analysa's User Profile";
+    a    foaf:PersonalProfileDocument;
+    foaf:maker
+       <#me>;
+    rdfs:seeAlso
+        "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3";
+    rdfs:seeAlso
+       "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3";
+    foaf:primaryTopic
+       <#me>.
+<#me>
+    a    con:Female, foaf:Person;
+    s:label
+       "Mia Analysa";
+    con:office
+            [ con:address
+                    [ con:city
+                       "Maynard";
+                    con:state
+                        "MA";
+                    con:country
+                       "USA";
+                    con:postalCode
+                       "01754";
+                    con:street
+                       "124 Acton Street" ];
+		     geo:lat
+               "42.4326";
+            geo:long
+               "-71.4559" ];
+    foaf:office_near
+       [ geo:lat "42.4326"; geo:long "-71.4559" ];
+    foaf:family_name
+       "Analysa";
+    foaf:givenname
+       "Mia";
+   foaf:img
+       <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/MiaAnalysa.png>;
+   foaf:mbox
+       <mailto:mia@msp.MASS.gov>;
+    foaf:mbox_sha1sum
+       "bd984f79e11e0f4265f9fd773d9e236ced767ff8";
+    foaf:name
+       "Mia Analysa";
+    foaf:nick
+       "";
+    foaf:title
+       "Ms";
+    foaf:member
+        <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/CommonwealthFusionCenter.org#me>;
+    fusion:authorized_purpose mglcja:usage;
+    fusion:job_title mgl:section_head;
+	foaf:job_title
+		"Intelligence_Analyst";
+	foaf:organization
+		"Massachusetts State Police";
+	foaf:organization_type
+    # mgl:Criminal_Justice_Agency;
+    "Criminal_Justice_Agency";
+	foaf:government_type mgl:MA_Executive_Branch;
+        foaf:organization_Homepage
+       <http://www.mass.gov/?pageID=eopsagencylanding&L=3&L0=Home&L1=Public+Safety+Agencies&L2=Massachusetts+State+Police&sid=Eeops>;
+	foaf:assigned_to_organization
+		"Commonwealth Fusion Center".
+
+<#key>
+  a rsa:RSAPublicKey;
+  cert:identity <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/MiaAnalysa#me>;
+  rsa:public_exponent <#exp>;
+  rsa:modulus <#mod>.
+
+<#exp>
+  cert:decimal "65537".
+
+<#mod>
+  cert:hex "0098ca4bea443ea34b7ed04ecbef5b76ac6a019316a03fd1f4ca5106e1afa0d8dc0ff63c5600fddfaa250f23a45f62b2b31943afce3b17da8a3a401cded8425f988bce9f7a35c512513637ab7996204c9489f7a2e992a3a14843fd9189fa6c20fd1ad0a54472e3db087f2c5c81f69c950010f7a995130edb66273df933d4d273eb4084464f39a608eb768634d2a9fe1e3f4490cedae6aa1c69067e04c915292d4bf5592b9412d73b97b6b82ad477ef5c1db80121e2ea17b56fb7a4dcfde6bf7557b5dcd047c899d01dea3d24c2b01c209f1b73c187622debb64672f0f1bf0afbc25a98a879f7bcc859ea738a51b80c7668d600aac1b2ba9f0071596762af40b0a1".

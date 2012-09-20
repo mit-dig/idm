@@ -1,0 +1,4 @@
+var policies = [
+  {name:"Massachusetts MGL 6-172", uri:"http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172.n3"},
+  {name:"IdMTestingPolicy", uri:"http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy.n3"},
+]                                                 
