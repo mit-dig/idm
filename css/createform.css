@@ -1,0 +1,94 @@
+* {margin:0; padding:0;}
+
+html {
+	font: 90%/1.3 arial,sans-serif;
+	padding:2em;
+	background:#fafafa;
+    margin-left: 50px;
+}
+form {
+	background:#fff;
+	padding:2em;
+	border:1px solid #eee;
+    margin:1em;
+    width:30em;
+}
+
+label {
+	float:left;
+	width:10em;
+	text-align:left;
+	margin-right:1em;
+}
+
+fieldset {
+    padding:1em;
+	border:1px solid #dedede; /* Default fieldset borders vary cross browser, so make them the same */
+    width:auto;
+  /* width: 10%;*/
+}
+
+legend span {
+	width:10em;
+	text-align:right;
+}
+input {
+	padding:0.15em;
+	width:10em;
+	border:1px solid #ddd;
+	background:#fafafa;
+	font:bold 0.95em arial, sans-serif;
+	-moz-border-radius:0.4em;
+	-khtml-border-radius:0.4em;
+}
+input:hover, input:focus {
+	border-color:#c5c5c5;
+	background:#f6f6f6;
+} 
+.button {
+    border: 1px solid #006;
+    background: #9cf;
+}
+.personid {
+	background:url(../gfx/user.gif) no-repeat 95% 1em;
+}
+.viewprofile {
+	background:url(../gfx/user.gif) no-repeat 95% 1em;
+}
+.profilemodification {
+	background:url(../gfx/user.gif) no-repeat 95% 1em;
+}
+
+fieldset div {
+	overflow:hidden; /* Contain the floating elements */
+	display:inline-block; /* Give layout in ie to contain float */
+}
+fieldset div {display:block;} /* Reset element back to block leaving layout in ie */
+label {
+	float:left; /* Take out of flow so the input starts at the same height */
+	width:5em; /* Set a width so the inputs line up */
+}
+
+.radio {
+	position:relative; /* Position so children are relative to this container */
+	border:0; /* Remove the border */
+}
+.radio span {
+	position:absolute; /* Take the content of the legend out of flow */
+	top:0;left:0; /* and position it to the top left of the fieldset */
+	width:5em; /* Same width as labels */
+}
+.radio ul {
+	margin-left:5em; /* Since the legend is out of flow. set margin, so inputs are inline */
+	list-style:none; /* Dont want bullets */
+}
+.radio li {
+	position:relative; /* Fix a bug in IE zoom functionality */
+	display:inline; /* Display the inputs in a line */
+	white-space:nowrap; /* We dont want a label to wrap between the input and label */
+}
+.radio label, .radio input {
+	width:auto; /* Reset the width on the label from the 5em, set earlier */
+	float:none; /* Reset the float from left on the label, set earlier */
+	vertical-align:middle; /* Align the radio buttons with the inputs */
+}

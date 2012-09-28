@@ -1,0 +1,7 @@
+var users = [
+	{ name: "Beverly Crusher"},
+	{ name: "Deanna Troi"},
+	{ name: "Geordi LaForge"},
+	{ name: "Jean-Luc Picard"},
+];
+

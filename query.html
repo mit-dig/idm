@@ -1,0 +1,73 @@
+<html>
+<head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>jQuery Autocomplete Plugin</title>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type='text/javascript' src='./js/jquery.bgiframe.min.js'></script>
+<script type='text/javascript' src='./js/jquery.ajaxQueue.js'></script>
+<script type='text/javascript' src='./js/thickbox-compressed.js'></script>
+<script type='text/javascript' src='./js/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='./data/users.json'></script>
+<link rel="stylesheet" type="text/css" href="./css/createform.css">
+
+<link rel="stylesheet" type="text/css" href="./css/jquery.autocomplete.css" />
+	
+<script type="text/javascript">
+$().ready(function() {
+
+	function log(event, data, formatted) {
+		$("<li>").html( !data ? "No match!" : "Selected: " + formatted).appendTo("#result");
+	}
+	
+	function formatItem(row) {
+		return row[0] + " (<strong>id: " + row[1] + "</strong>)";
+	}
+	function formatResult(row) {
+		return row[0].replace(/(<.+?>)/gi, '');
+	}
+	
+	$("#username").autocomplete(users, {
+		minChars: 0,
+		width: 310,
+		matchContains: "word",
+		autoFill: false,
+		formatItem: function(row, i, max) {
+			return row.name;
+		},
+		formatMatch: function(row, i, max) {
+			return row.name;
+		},
+		formatResult: function(row) {
+			return row.name;
+		}
+	});
+
+
+	
+
+});
+
+</script>
+	
+</head>
+<body>
+
+
+<img src="./img/idm_header_logo.png" alt="IDM" width="450" height="70"/> <br/> <br/> <br/>
+
+<form name="myform" action="./idm_query_ui2.cgi" method="POST">
+	<fieldset class="personid">
+	  <legend>Select user whose attributes you want to fetch from IdM</legend>
+	  <div><label for="username">Name</label><input id="username" name="username" type="text"/></div><br/><br/>
+	  <div><input type="submit" class="button" name="id-IdM" id="id-IdM" value="Submit!"></div>
+	</fieldset>
+</form> 
+
+<!--<h3>Result:</h3> <ol id="result"></ol>-->
+
+
+</body>
+</html>
+
+
