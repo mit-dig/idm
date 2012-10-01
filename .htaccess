@@ -1,4 +1,3 @@
-SSLRequireSSL
 SSLOptions +OptRenegotiate +StdEnvVars
 SSLVerifyClient require
 SSLVerifyDepth 2
