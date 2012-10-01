@@ -1,3 +1,6 @@
 # Ignore emacs backup and temporary files
 *~
 \#*\#
+
+# Ignore platform-specific files
+.DS_Store
