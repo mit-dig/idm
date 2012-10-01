@@ -14,13 +14,13 @@
     <script src="index_files/files.txt" type="text/javascript"></script>
     <script src="index_files/policies.txt" type="text/javascript"></script>
 
-    <script src="http://dig.csail.mit.edu/2012/DHS/IdMTest/data/users.json"></script>
+    <script src="./data/users.json"></script>
 
   <style type="text/css">/* TREE LAYOUT */ .tree ul { margin:0 0 0 5px; padding:0 0 0 0; list-style-type:none; } .tree li { display:block; min-height:18px; line-height:18px; padding:0 0 0 15px; margin:0 0 0 0; /* Background fix */ clear:both; } .tree li ul { display:none; } .tree li a, .tree li span { display:inline-block;line-height:16px;height:16px;color:black;white-space:nowrap;text-decoration:none;padding:1px 4px 1px 4px;margin:0; } .tree li a:focus { outline: none; } .tree li a input, .tree li span input { margin:0;padding:0 0;display:inline-block;height:12px !important;border:1px solid white;background:white;font-size:10px;font-family:Verdana; } .tree li a input:not([class="xxx"]), .tree li span input:not([class="xxx"]) { padding:1px 0; } /* FOR DOTS */ .tree .ltr li.last { float:left; } .tree > ul li.last { overflow:visible; } /* OPEN OR CLOSE */ .tree li.open ul { display:block; } .tree li.closed ul { display:none !important; } /* FOR DRAGGING */ #jstree-dragged { position:absolute; top:-10px; left:-10px; margin:0; padding:0; } #jstree-dragged ul ul ul { display:none; } #jstree-marker { padding:0; margin:0; line-height:5px; font-size:1px; overflow:hidden; height:5px; position:absolute; left:-45px; top:-30px; z-index:1000; background-color:transparent; background-repeat:no-repeat; display:none; } #jstree-marker.marker { width:45px; background-position:-32px top; } #jstree-marker.marker_plus { width:5px; background-position:right top; } /* BACKGROUND DOTS */ .tree li li { overflow:hidden; } .tree > .ltr > li { display:table; } /* ICONS */ .tree ul ins { display:inline-block; text-decoration:none; width:16px; height:16px; } .tree .ltr ins { margin:0 4px 0 0px; } </style><link
  href="index_files/style.css" media="all" type="text/css" 
 rel="stylesheet"><style type="text/css">#filetree li[rel=group] > a ins {  background-image:url(img/network-workgroup.png); } #filetree li[rel=folder] > a ins {  background-image:url(img/folder.png); } #filetree li[rel=file] > a ins {  background-image:url(img/x-office-document.png); } </style></head><body>
   <img style="float: left; width: 25em;" 
-src="http://dig.csail.mit.edu/2012/DHS/IdMTest/img/idm_header_logo.png">
+src="./img/idm_header_logo.png">
     <div id="main" style="width: 40em; padding: 2px; margin-left: auto; 
 margin-right: auto;">
       <div id="sender" style="height: 8em; border: 1px solid; margin: 
@@ -45,10 +45,10 @@ rel="group" class="closed last"><a href="" style="" class=""><ins>&nbsp;</ins>Fu
  class="closed" rel="folder"><a href="" style="" class=""><ins>&nbsp;</ins>Analysa</a><ul><li
  class="last closed" rel="folder"><a href="" style="" class=""><ins>&nbsp;</ins>RFI</a><ul><li
  class="leaf" rel="file"><a 
-href="http://dig.csail.mit.edu/2012/DHS/JHU/MA/documents/Fake_MA_Request.pdf"
+href="./MA/documents/Fake_MA_Request.pdf"
  style="" class=""><ins>&nbsp;</ins>RBGuy</a></li><li class="leaf" 
 rel="file"><a 
-href="http://dig.csail.mit.edu/2012/DHS/JHU/MA/documents/Fake_MA_Request_core10.pdf"
+href="./MA/documents/Fake_MA_Request_core10.pdf"
  style="" class=""><ins>&nbsp;</ins>RBGuyCore</a></li><li class="leaf" 
 rel="file"><a 
 href="http://dig.csail.mit.edu/2009/DHS-fusion/documents/BBunny.pdf" 
@@ -130,7 +130,7 @@ id="summary_submit" type="button">
           }
           }).autocomplete("result",function(e,item) {
 //              $('#summary_sender').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
-              item.uri = "http://dig.csail.mit.edu/2012/DHS/IdMTest/idm_query.cgi?username="+escape(item.name)+"#me";
+              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?username="+escape(item.name)+"#me";
               $('#summary_sender').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               senderbox.autocomplete = true;
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
@@ -170,7 +170,7 @@ id="summary_submit" type="button">
           }
           }).autocomplete("result",function(e,item) {
 //              $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
-              item.uri = "http://dig.csail.mit.edu/2012/DHS/IdMTest/idm_query.cgi?username="+escape(item.name)+"#me";
+              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?username="+escape(item.name)+"#me";
               $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
               var converturi = "http://mr-burns.w3.org/?data-uri[]="+escape(docpart)+"&input=&output=jsonp";
@@ -202,7 +202,7 @@ id="summary_submit" type="button">
       var name = $(node).children("a:eq(0)").text().substring(1);
       filebox.value = uri;
       $('#summary_file').html("<a href='"+uri+"' target='_blank'>"+name+"</a>");
-/*      var parsed = "http://mr-burns.w3.org/?data-uri[]="+escape("http://dig.csail.mit.edu/2012/DHS/JHU/xmpparser.py?uri="+escape(uri))+"&input=rdf-xml&output=jsonp";
+/*      var parsed = "http://mr-burns.w3.org/?data-uri[]="+escape("http://dice.csail.mit.edu/idm/xmpparser.py?uri="+escape(uri))+"&input=rdf-xml&output=jsonp";
       $.ajax({
                       url: parsed, 
                       success: function( data ) {
@@ -343,7 +343,7 @@ $('#summary_submit').click( function( e ) {
   if($('#summary_file').children('a:eq(0)').attr('href') == undefined){
   	  document = filebox.value;
   	  $('#summary_file').html("<a href='"+document+"' target='_blank'>"+document+"</a>");
-/*  	  var parsed = "http://mr-burns.w3.org/?data-uri[]="+escape("http://dig.csail.mit.edu/2012/DHS/JHU/xmpparser.py?uri="+escape(document))+"&input=rdf-xml&output=jsonp";
+/*  	  var parsed = "http://mr-burns.w3.org/?data-uri[]="+escape("http://dice.csail.mit.edu/idm/xmpparser.py?uri="+escape(document))+"&input=rdf-xml&output=jsonp";
   	  $.ajax({
                    url: parsed,
                    success: function( data ) {
