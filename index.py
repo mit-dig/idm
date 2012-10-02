@@ -1,4 +1,18 @@
-<html><head>
+#!/usr/bin/env python
+
+import os
+import urllib
+import cgi
+import cgitb
+cgitb.enable()
+
+dn = "&".join(
+    ["%s=%s" % (attribute[0].lower(), urllib.quote(attribute[1]))
+     for attribute in [attribute.trim().split("=")
+                       for attribute in os.environ["SSL_CLIENT_S_DN"].split(",")]])
+
+print "Content-type: text/html"
+print """<html><head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
   
     <link type="text/css" href="index_files/ui.css" rel="stylesheet">
@@ -130,7 +144,7 @@ id="summary_submit" type="button">
           }
           }).autocomplete("result",function(e,item) {
 //              $('#summary_sender').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
-              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?username="+escape(item.name)+"#me";
+              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me";
               $('#summary_sender').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               senderbox.autocomplete = true;
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
@@ -170,7 +184,7 @@ id="summary_submit" type="button">
           }
           }).autocomplete("result",function(e,item) {
 //              $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
-              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?username="+escape(item.name)+"#me";
+              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me";
               $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
               var converturi = "http://mr-burns.w3.org/?data-uri[]="+escape(docpart)+"&input=&output=jsonp";
@@ -370,3 +384,4 @@ $('#summary_submit').click( function( e ) {
 
   </script>
 <div style="display: none;" id="jstree-marker"></div></body></html>
+"""
