@@ -1,5 +1,4 @@
 import sys
-sys.path = ["/afs/csail.mit.edu/u/d/dmiao/python_modules"] + sys.path
 
 import xml.etree.ElementTree
 import OpenSSL.crypto

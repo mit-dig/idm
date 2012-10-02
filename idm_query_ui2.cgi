@@ -13,12 +13,16 @@ form = cgi.FieldStorage()
 if form.has_key("username"):
 
 	username = form.getvalue("username")
+	if form.has_key("test_qa"):
+		use_test_webservice = True
+	else:
+		use_test_webservice = False
 	print "Content-type: text/html"
 	print
 
 	print "<html><head><title>IdM Demo</title><link rel='stylesheet' type='text/css' href='css/output.css' /></head><body> <img src='./img/idm_header_logo.png' alt='IDM' width='450' height='70'/> <br/> <br/> <br/><table>"
 	
-	g = fetch_person_info(username)
+	g = fetch_person_info(username, use_test_webservice)
 
 	for s, p, o in g:
 		if str(p) != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type":

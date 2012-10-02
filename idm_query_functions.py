@@ -1,9 +1,6 @@
 import urllib2
 import sys
 
-#MUST CHANGE THIS LINE TO GET MODULES IN ANOTHER PATH
-sys.path = ["/afs/csail.mit.edu/u/d/dmiao/python_modules"] + sys.path
-
 from lxml.etree import Element, SubElement, tostring
 import xml.etree.ElementTree as ET
 import lxml.etree
@@ -218,12 +215,18 @@ def make_soap_file_QA(soap_request_user):
 	#print tostring(envelope, pretty_print=True)
 	return tostring(envelope)
 
-def fetch_person_info(soap_request):
-	soap_body = make_soap_file_QA(soap_request) #Change this depending on the soap request
-	if soap_body == None: #There was an error in the request
-		return None
+def fetch_person_info(soap_request, use_test_webservice=False):
+	if (use_test_webservice):
+			soap_body = make_soap_file(soap_request)
+			if soap_body == None: #There was an error in the request
+				return None
+			req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/TEST', data=soap_body)
+	else:
+		soap_body = make_soap_file_QA(soap_request) #Change this depending on the soap request
+		if soap_body == None: #There was an error in the request
+			return None
+		req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/QA', data=soap_body)
 	
-	req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/QA', data=soap_body)
 	req.add_header('Content-Type', 'text/xml')
 	resp = urllib2.urlopen(req)
 	content = resp.read()
@@ -289,7 +292,7 @@ def main():
 	for u in users:
 		if u == "William Riker":
 			continue
-		print fetch_person_info(u)
+		print fetch_person_info(u, True)
 		return
 
 if __name__ == "__main__":
