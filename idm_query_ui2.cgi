@@ -42,7 +42,7 @@ if form.has_key("username"):
 	if form.has_key("test_qa"):
 		use_test_webservice = True
 	else:
-		use_test_webservice = True
+		use_test_webservice = False
 	print "Content-type: text/html"
 	print
 
