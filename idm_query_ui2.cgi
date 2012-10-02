@@ -26,7 +26,6 @@ if form.has_key("username"):
 
 	username = form.getvalue("username")
 	fullname = userDic.get(username, "")
-	print fullname
 	if (fullname == ""):
 		print "Content-type: text/html"
 		print """
