@@ -9,7 +9,7 @@ cgitb.enable()
 if "SSL_CLIENT_S_DN" in os.environ:
     dn = "&".join(
         ["%s=%s" % (attribute[0].lower(), urllib.quote(attribute[1]))
-         for attribute in [attribute.trim().split("=")
+         for attribute in [attribute.strip().split("=")
                            for attribute in os.environ["SSL_CLIENT_S_DN"].split(",")]])
 else:
     dn = ""
