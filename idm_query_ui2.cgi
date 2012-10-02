@@ -25,24 +25,25 @@ form = cgi.FieldStorage()
 if form.has_key("username"):
 
 	username = form.getvalue("username")
-	fullname = userDic[username]
-	if fullname == None:
+	fullname = userDic.get(username, "")
+	print fullname
+	if (fullname == ""):
 		print "Content-type: text/html"
-        print """
-        <html>
-        <body>
-        <p>The response is:</p>"""
-        print "<p>User not found</p>"
-        print """
-        </body>
-        </html>
-        """
-        sys.exit()
+		print """
+		<html>
+		<body>
+		<p>The response is:</p>"""
+		print "<p>User not found</p>"
+		print """
+		</body>
+		</html>
+		"""
+		sys.exit()
         
 	if form.has_key("test_qa"):
 		use_test_webservice = True
 	else:
-		use_test_webservice = False
+		use_test_webservice = True
 	print "Content-type: text/html"
 	print
 

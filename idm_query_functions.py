@@ -198,7 +198,7 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 				return None
 			req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/TEST', data=soap_body)
 	else:
-		soap_body = make_soap_file_QA(soap_request) #Change this depending on the soap request
+		soap_body = make_soap_file_QA(distinguished_name) #Change this depending on the soap request
 		if soap_body == None: #There was an error in the request
 			return None
 		req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/QA', data=soap_body)
