@@ -13,20 +13,7 @@ import hashlib
 import base64
 import OpenSSL
 
-
-users = ["Geordi LaForge", "Deanna Troi", "William Riker", "Jean-Luc Picard", "Beverly Crusher", "Worf Rozhenko", "Lwaxana Troi", "Tam Elbrun"]
-
-userDic = {"Geordi LaForge":"CN=Geordi LaForge + UID=9000000006,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP", 
-	"Deanna Troi":"CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
-	"William Riker":"CN=William Thomas Riker + UID=9000000003,OU=People,OU=DHS HQ,OU=Directorate of Homeworld",
-	"Jean-Luc Picard":"CN=Jean Luc Picard + UID=9000000001,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
-	"Beverly Crusher":"CN=Beverly Crusher + UID=9000000005,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
-	"Worf Rozhenko": "CN=Worf Rozhenko + UID=9000000009,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
-	"Lwaxana Troi":"CN=Lwaxana Troi + UID=8000000001,ou=People, ou=Betazed, o=Diplomatic Corps, C=UFP",
-	"Tam Elbrun":"CN=Tam Elbrun + UID=8000000002,OU=People,OU=Betazed,O=Diplomatic Corps,C=UFP"
-}
-
-def make_soap_file(soap_request_user):
+def make_soap_file(distinguished_name):
 
 	#	print soap_request_user
 	#        name = "CN=Geordi LaForge + UID=9000000006"
@@ -59,17 +46,11 @@ def make_soap_file(soap_request_user):
 	
 	nameID = ET.SubElement(subject, 'saml:NameID', {'Format':"urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName"})
 	
-	user_info = userDic[soap_request_user]
-	#	print user_info
-	if user_info == None:
-	#		print "ERROR: UNKNOWN REQUEST"
-		return None
-	
-	nameID.text = user_info
+	nameID.text = distinguished_name
 	
 	return ET.tostring(envelope)
 
-def make_soap_file_QA(soap_request_user):
+def make_soap_file_QA(distinguished_name):
 	
 	# Namespace Declaration
 	SAML_NS = "urn:oasis:names:tc:SAML:2.0:assertion"
@@ -111,12 +92,7 @@ def make_soap_file_QA(soap_request_user):
 	
 	nameID = SubElement(subject, SAML + 'NameID', Format="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName")
 	
-	user_info = userDic[soap_request_user]
-	
-	if user_info == None:
-		return None
-	
-	nameID.text = user_info
+	nameID.text = distinguished_name
 	
 	# Calculate digest value for Enveloped Signature of samlp:AttributeQuery
 	digest = hashlib.sha1()
@@ -215,9 +191,9 @@ def make_soap_file_QA(soap_request_user):
 	#print tostring(envelope, pretty_print=True)
 	return tostring(envelope)
 
-def fetch_person_info(soap_request, use_test_webservice=False):
+def fetch_person_info(distinguished_name, use_test_webservice=False):
 	if (use_test_webservice):
-			soap_body = make_soap_file(soap_request)
+			soap_body = make_soap_file(distinguished_name)
 			if soap_body == None: #There was an error in the request
 				return None
 			req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/TEST', data=soap_body)
@@ -288,12 +264,9 @@ def xml_to_RDF(xml_string):
 #	return content
 
 def main():
-
-	for u in users:
-		if u == "William Riker":
-			continue
-		print fetch_person_info(u, True)
-		return
+	full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
+	print fetch_person_info(full_distinguished_name, True)
+	return
 
 if __name__ == "__main__":
 	main()
