@@ -1,4 +1,5 @@
 SSLOptions +OptRenegotiate +StdEnvVars
 SSLVerifyClient require
 SSLVerifyDepth 2
-SSLRequire ((%{SSL_CLIENT_S_DN_O} == "Massachusetts State Police" && %{SSL_CLIENT_S_DN_CN} == "Mia Analysa") || (%{REQUEST_FILENAME} != "/var/www/idm/index.html"))
+# Can't use this line for some reason.
+#SSLRequire (%{SSL_CLIENT_S_DN_O} == "Massachusetts State Police" && %{SSL_CLIENT_S_DN_CN} == "Mia Analysa")
