@@ -15,6 +15,7 @@ else:
     dn = ""
 
 print "Content-type: text/html"
+print
 print """<html><head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
   
