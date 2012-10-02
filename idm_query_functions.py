@@ -215,7 +215,7 @@ def make_soap_file_QA(soap_request_user):
 	d_securityTokenReference = SubElement(d_keyInfo, WSSE + "SecurityTokenReference")
 	d_key_reference = SubElement(d_securityTokenReference, WSSE + "Reference", URI="#id-binary-security-token", ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3")
 	
-	print tostring(envelope, pretty_print=True)
+	#print tostring(envelope, pretty_print=True)
 	return tostring(envelope)
 
 def fetch_person_info(soap_request):
@@ -223,7 +223,7 @@ def fetch_person_info(soap_request):
 	if soap_body == None: #There was an error in the request
 		return None
 	
-	req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/TEST', data=soap_body)
+	req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/QA', data=soap_body)
 	req.add_header('Content-Type', 'text/xml')
 	resp = urllib2.urlopen(req)
 	content = resp.read()
