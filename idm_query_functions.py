@@ -265,7 +265,13 @@ def xml_to_RDF(xml_string):
 
 def main():
 	full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
-	print fetch_person_info(full_distinguished_name, True)
+	rdf_output = fetch_person_info(full_distinguished_name, True) 
+	for s,p,o in rdf_output:
+		print "==================BEGIN============="
+		print s
+		print p
+		print o
+		print "==================END===============\n"
 	return
 
 if __name__ == "__main__":
