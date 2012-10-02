@@ -236,10 +236,7 @@ def xml_to_RDF(xml_string):
 		if "AttributeStatement" in child.tag:
 			for child1 in child:
 				for child2 in child1:
-					if child1.attrib.get("Name") in ("urn:test:idmanagement.gov:icam:attribute:v1:designatedRole", "urn:test:idmanagement.gov:icam:attribute:v1:organizationName", "urn:test:idmanagement.gov:icam:attribute:v1:organizationUnitName", "urn:test:idmanagement.gov:icam:attribute:v1:givenName"):
 						store.add((user, URIRef(child1.attrib.get("Name")),Literal(child2.text)))
-					else:
-						store.add((user, URIRef(child1.attrib.get("Name")),child2.text))
 	
 	rdf_output = store.serialize()
 	
