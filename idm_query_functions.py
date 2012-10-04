@@ -192,25 +192,39 @@ def make_soap_file_QA(distinguished_name):
 	return tostring(envelope)
 
 def fetch_person_info(distinguished_name, use_test_webservice=False):
+	LOGGING = True;
+	tstart = datetime.datetime.now()
 	if (use_test_webservice):
 			soap_body = make_soap_file(distinguished_name)
+			tmakereq = datetime.datetime.now()
 			if soap_body == None: #There was an error in the request
 				return None
 			req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/TEST', data=soap_body)
 	else:
 		soap_body = make_soap_file_QA(distinguished_name) #Change this depending on the soap request
+		tmakesoap = datetime.datetime.now()
 		if soap_body == None: #There was an error in the request
 			return None
 		req = urllib2.Request(url='https://aplgig-xml.jhuapl.edu/ICAM/BAE/ExternalBAEService/v2.0/QA', data=soap_body)
-	
+		
 	req.add_header('Content-Type', 'text/xml')
 	resp = urllib2.urlopen(req)
+	treq = datetime.datetime.now()
+	
 	content = resp.read()
+	tread = datetime.datetime.now()
 	
 	decrypted_content = run_test_scenario(content)
+	tdecrypt = datetime.datetime.now()
 	
 	rdf_output = xml_to_RDF(decrypted_content)
+	tconvert = datetime.datetime.now()
 	
+	if LOGGING is True:
+		#start date and time, makereq time, request time, read time, decrypt time, convert time, total time
+		list = [str(tstart), (tmakereq-tstart).total_seconds(), (treq-tmakereq).total_seconds(), (tread-treq).total_seconds(), (tdecrypt-tread).total_seconds(), (tconvert-tdecrypt).total_seconds(), (tconvert-tstart).total_seconds()]
+		print list
+		
 	return rdf_output
 
 def xml_to_RDF(xml_string):
