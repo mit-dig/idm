@@ -12,19 +12,19 @@ form = cgi.FieldStorage()
 if form.has_key("cn"):
 	# We need at least a common name
 	dn = []
-	for key in ("c", "st", "l", "o", "ou"):
+	if form.has_key("email"):
+		for value in form.getlist("email"):
+			dn.append("Email=%s" % value)
+	for key in ("uid", "d", "s", "g", "i", "t");
 		if form.has_key(key):
 			for value in form.getlist(key):
 				dn.append("%s=%s" % (key.upper(), value))
 	for value in form.getlist("cn"):
 		dn.append("CN=%s" % value)
-	for key in ("t", "i", "g", "s", "d", "uid"):
+	for key in ("ou", "o", "l", "st", "c"):
 		if form.has_key(key):
 			for value in form.getlist(key):
 				dn.append("%s=%s" % (key.upper(), value))
-	if form.has_key("email"):
-		for value in form.getlist("email"):
-			dn.append("Email=%s" % value)
 	
 	print "Content-type: application/rdf+xml"
 	print
