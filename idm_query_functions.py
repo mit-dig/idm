@@ -221,12 +221,18 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 	rdf_output = xml_to_RDF(decrypted_content)
 	tconvert = datetime.datetime.now()
 	
-#	if LOGGING is True:
+	if LOGGING is True:
 		#start date and time, makereq time, request time, read time, decrypt time, convert time, total time
-		#list = [str(tstart), (tmakereq-tstart).total_seconds(), (treq-tmakereq).total_seconds(), (tread-treq).total_seconds(), (tdecrypt-tread).total_seconds(), (tconvert-tdecrypt).total_seconds(), (tconvert-tstart).total_seconds()]
+		list = [str(tstart), total_seconds(tmakereq-tstart), total_seconds(treq-tmakereq), total_seconds(tread-treq), total_seconds(tdecrypt-tread), total_seconds(tconvert-tdecrypt), total_seconds(tconvert-tstart)]
 		#print list
 		
 	return rdf_output
+
+def total_seconds(timedelta):
+	
+	totalseconds = timedelta.days * 24 * 3600 + timedelta.seconds + timedelta.microseconds/1000000.0
+	
+	return totalseconds
 
 def xml_to_RDF(xml_string):
 	
