@@ -15,7 +15,7 @@ if form.has_key("cn"):
 	if form.has_key("email"):
 		for value in form.getlist("email"):
 			dn.append("Email=%s" % value)
-	for key in ("uid", "d", "s", "g", "i", "t");
+	for key in ("uid", "d", "s", "g", "i", "t"):
 		if form.has_key(key):
 			for value in form.getlist(key):
 				dn.append("%s=%s" % (key.upper(), value))
