@@ -9,8 +9,6 @@ cgitb.enable()
 import StringIO
 from idm_query_functions import fetch_person_info
 
-users = ["Geordi LaForge", "Deanna Troi", "William Riker", "Jean-Luc Picard", "Beverly Crusher", "Worf Rozhenko", "Lwaxana Troi", "Tam Elbrun"]
-
 userDic = {"Geordi LaForge":"CN=Geordi LaForge + UID=9000000006,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP", 
 	"Deanna Troi":"CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
 	"William Riker":"CN=William Thomas Riker + UID=9000000003,OU=People,OU=DHS HQ,OU=Directorate of Homeworld",
@@ -18,7 +16,9 @@ userDic = {"Geordi LaForge":"CN=Geordi LaForge + UID=9000000006,OU=People,OU=FEM
 	"Beverly Crusher":"CN=Beverly Crusher + UID=9000000005,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
 	"Worf Rozhenko": "CN=Worf Rozhenko + UID=9000000009,OU=People,OU=FEMA,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP",
 	"Lwaxana Troi":"CN=Lwaxana Troi + UID=8000000001,ou=People, ou=Betazed, o=Diplomatic Corps, C=UFP",
-	"Tam Elbrun":"CN=Tam Elbrun + UID=8000000002,OU=People,OU=Betazed,O=Diplomatic Corps,C=UFP"
+	"Tam Elbrun":"CN=Tam Elbrun + UID=8000000002,OU=People,OU=Betazed,O=Diplomatic Corps,C=UFP",
+	"Mia Analysa":"CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US",
+	"Frederick Agenti":"CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
 }
 
 form = cgi.FieldStorage()

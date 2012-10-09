@@ -193,6 +193,7 @@ def make_soap_file_QA(distinguished_name):
 
 def fetch_person_info(distinguished_name, use_test_webservice=False):
 	LOGGING = True;
+	
 	tstart = datetime.datetime.now()
 	if (use_test_webservice):
 			soap_body = make_soap_file(distinguished_name)
@@ -223,7 +224,7 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 	if LOGGING is True:
 		#start date and time, makereq time, request time, read time, decrypt time, convert time, total time
 		list = [str(tstart), (tmakereq-tstart).total_seconds(), (treq-tmakereq).total_seconds(), (tread-treq).total_seconds(), (tdecrypt-tread).total_seconds(), (tconvert-tdecrypt).total_seconds(), (tconvert-tstart).total_seconds()]
-		print list
+		#print list
 		
 	return rdf_output
 
@@ -275,7 +276,9 @@ def xml_to_RDF(xml_string):
 #	return content
 
 def main():
-	full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
+	#full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
+	#full_distinguished_name = "CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US"
+	full_distinguished_name = "CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
 	rdf_output = fetch_person_info(full_distinguished_name, True) 
 	for s,p,o in rdf_output:
 		print "==================BEGIN============="
