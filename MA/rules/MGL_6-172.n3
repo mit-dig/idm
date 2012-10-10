@@ -236,7 +236,20 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :R log:semantics :RECEIVER.
-        :RECEIVER log:includes {:R foaf:member :MEMBERSHIP. }.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname and orgunitname.  In practice it should
+        #       probably match everything from the OrgUnitName up (ST,
+        #       C)
+ 	:RECEIVER log:includes { :S idm:organizationUnitName :O; }.
+	# TODO: This is cheap (it references the ICE and DHS profiles
+        #       directly).  In practice this should be a standalone
+        #       file with all known in-state orgs.
+	#       It also assumes that it will always have an orgunit.
+	<http://dice.csail.mit.edu/idm/US/profiles/ICE> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :MEMBERSHIP a org:GovernmentAgency;
+	        rdfs:label :O .
+	}.
     };
     air:then [ 
 	air:description (  :R " is a member of organization " :MEMBERSHIP ".");
@@ -310,7 +323,7 @@
  	:SENDER log:includes { :S idm:organizationName :O }.
 	# TODO: This is cheap (it references the MSP profile
         #       directly).  In practice this should be a standalone
-        #       file with all orgs.
+        #       file with all known in-state orgs.
 	<http://dice.csail.mit.edu/idm/MA/profiles/MSP> log:semantics :ORG-DATA.
 	:ORG-DATA log:includes {
 	    :ORG a org:GovernmentAgency;

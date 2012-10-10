@@ -4,6 +4,6 @@
 @prefix law: <http://dice.csail.mit.edu/idm/common/law#>
 
 :ICE a org:GovernmentAgency ;
-    rdfs:label "Immigration and Customs Enforcement"@en ;
+    rdfs:label "Immigration and Customs Enforcement" ;
     org:parentOrganization <http://dice.csail.mit.edu/idm/US/profiles/DHS#DHS> ;
     law:primaryFunction law:Investigation .
