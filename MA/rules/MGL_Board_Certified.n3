@@ -16,6 +16,6 @@
 	foaf:Organization <http://dig.csail.mit.edu/2010/DHS-fusion/FL/profiles/FDLE.org#me>;
 	foaf:Organization <http://dig.csail.mit.edu/2010/DHS-fusion/MD/profiles/BaltimorePoliceDept.org#me>;
 	foaf:Organization <http://dig.csail.mit.edu/2012/DHS/JHU/MA/profiles/CommonwealthFusionCenter.org#me>;
-	foaf:Organization <http://dig.csail.mit.edu/2012/DHS/JHU/US/profiles/DHS_ICE.org#me>.
+	foaf:Organization <http://dice.csail.mit.edu/idm/US/profiles/ICE#ICE>.
 
 
