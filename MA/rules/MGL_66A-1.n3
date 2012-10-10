@@ -63,7 +63,7 @@
 :MGL_66A-1_init a air:Belief-rule;
     air:if {
         :P a mglcja:Party.
-        :P law:primaryFunction law:Investigation .
+        :P law:primaryFunction :FUNCTION .
 #        :P fusion:authorized_purpose :FUNCTION.
     };
     air:then [air:rule :MGL_66A-1_apprehension ].
