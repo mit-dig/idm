@@ -11,8 +11,10 @@ if "SSL_CLIENT_S_DN" in os.environ:
         ["%s=%s" % (attribute[0].lower(), urllib.quote(attribute[1]))
          for attribute in [attribute.strip().split("=", 2)
                            for attribute in os.environ["SSL_CLIENT_S_DN"].split("/")[1:]]])
+    cn = os.environ["SSL_CLIENT_S_DN_CN"]
 else:
     dn = ""
+    cn = ""
 
 print "Content-type: text/html"
 print
@@ -43,10 +45,8 @@ src="./img/idm_header_logo.png">
 margin-right: auto;">
       <div id="sender" style="height: 8em; border: 1px solid; margin: 
 2px; padding: 0.5em;">
-      	<p>Please enter the sender's URL:</p>
-        <input class="ui-autocomplete-input" autocomplete="off" 
-id="senderbox" name="senderbox" style="margin-top: 1em; float: left; 
-width: 30em;">
+      	<p>The sender's URL:</p>
+        <a target="_blank" href="http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me">""" + cn + """</a>
         <img style="float: right; margin-left: 0.5em; margin-right: 
 auto; height: 5em; width: 5em;" id="senderimg" 
 src="index_files/image-x-generic.png">
@@ -114,7 +114,7 @@ be disabled if you are not able to install Tabulator.</p></td>
       </div>
       <div id="summary" style="height: 10em; border: 1px solid; margin: 
 2px; padding: 0.5em;">
-        <p style="margin: 2px;">From: <span id="summary_sender"></span></p>
+        <p style="margin: 2px;">From: <span id="summary_sender"><a target="_blank" href="http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me">""" + cn + """</a></span></p>
         <p style="margin: 2px;">To: <span id="summary_recipient"></span></p>
         <p style="margin: 2px;">File: <span id="summary_file"></span></p>
         <p style="margin: 2px;">Policy: <span id="summary_policy"><a target='_blank' href='http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy.n3'>IdMTestingPolicy</a></span></p>
@@ -134,6 +134,7 @@ id="summary_submit" type="button">
   
     $(document).ready(function(){
       $('#filebox').attr("value", "");
+/*
       $('#senderbox').autocomplete({
           data: users,
           matchContains:true,
@@ -172,7 +173,7 @@ id="summary_submit" type="button">
                       },
                       dataType: "jsonp"
               });
-          });
+          });*/
           
       $('#recipientbox').autocomplete({
           data: users,
@@ -291,11 +292,11 @@ id="summary_submit" type="button">
     function callToTabulator(sender, recipient, document, policy, senderLabel, recipientLabel){
     	  if (!isValidURL(sender) && !isValidURL(recipient) && !isValidURL(document)){        
 		  $('#summary_recipient').html("");
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  $('#summary_file').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender, recipient and document file and try submitting again.");
 	  }else if (!isValidURL(sender) && !isValidURL(document)){
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  $('#summary_file').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender and document file and try submitting agian.");
 	  }else if(!isValidURL(recipient) && !isValidURL(document)){
@@ -304,10 +305,10 @@ id="summary_submit" type="button">
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired recipient and document file and try submitting again.");
 	  }else if (!isValidURL(sender) && !isValidURL(recipient)){        
 		  $('#summary_recipient').html("");
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender and recipient and try submitting again.");
 	  }else if (!isValidURL(sender)){
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  alert("The inputed URL is invalid. Please insert a valid URL for the desired sender and try submitting agian.");
 	  }else if(!isValidURL(recipient)){
 		  $('#summary_recipient').html("");
@@ -339,13 +340,15 @@ id="summary_submit" type="button">
 $('#summary_submit').click( function( e ) { 
   var sender;
   var sender_label = undefined;
+/*
   if($('#summary_sender').children('a:eq(0)').attr('href') == undefined){
   	  sender = senderbox.value;
           $('#summary_sender').html("<a target='_blank' href='"+sender+"'>"+sender+"</a>");
   }else{
+*/
   	  sender = $('#summary_sender').children('a:eq(0)').attr('href');
   	  sender_label = $('#summary_sender').children('a:eq(0)').html();
-  }
+//  }
   
   var recipient;
   var recipient_label = undefined;
