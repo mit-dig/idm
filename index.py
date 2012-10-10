@@ -330,7 +330,7 @@ id="summary_submit" type="button">
 		  if (recipientLabel) { log += "&to_label="+escape(recipientLabel); }
 		  /* var policyrunner = "http://samuelsw.scripts.mit.edu/dhs_air.py"; */
 		  /* var policyrunner = "http://mr-burns.w3.org/cgi-bin/dhs_air.py"; */
-		  var policyrunner = "http://dice.csail.mit.edu/dhs_air.py";
+		  var policyrunner = "http://dice.csail.mit.edu/idm/dhs_air.py";
       
 		  policyrunner = policyrunner + "?" + log;
 		  window.open( policyrunner );
