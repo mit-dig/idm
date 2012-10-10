@@ -13,6 +13,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix mgl: <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT#>.
+# TODO: Hack around because I don't want to tamper with XMP at this point.
+@prefix mglont: <http://dig.csail.mit.edu/2010/DHS-fusion/MA/rules/MGL_6-172_ONT#>.
 @prefix mglcja: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT#>.
 @prefix mgl66a: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1#>.
 @prefix board_cert: <http://dice.csail.mit.edu/idm/MA/rules/MGL_Board_Certified#>.
@@ -363,7 +365,7 @@
     rdfs:comment "Except as otherwise provided in this section and sections one hundred and seventy-three to one hundred and seventy-five, inclusive, criminal offender record information, and where present, evaluative information, shall be disseminated, whether directly or through any intermediary, only to criminal justice agencies.";
     air:if {
         :R a mglcja:member .
-    	:ABOUT a mgl:Criminal_Offender_Record_Information.
+    	:ABOUT a mglont:Criminal_Offender_Record_Information.
     };
     air:then [
         air:description
