@@ -593,9 +593,9 @@
     rdfs:comment "Dissemination of criminal offender record information shall, except as provided in this section and for purposes of research programs approved under section one hundred and seventy-four, be permitted only if the inquiry is based upon name, fingerprints, or other personal identifying characteristics.";
     # There are two ways to do this: One with air:owlEntails as follows:
     air:if {
-	 <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+         <http://dig.csail.mit.edu/2010/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
 	 (:ONTOLOGY :DOC-DATA) log:conjunction :CONJUNCTION .
-	 :CONJUNCTION air:owlEntails { :INFO mgl:personal_characteristics :SUBJECT } .
+	 :CONJUNCTION air:owlEntails { :INFO mglont:personal_characteristics :SUBJECT } .
     # Or from having run the air:Belief-rule :MGL_Personal_Characteristics to assert what kind of Characteristic we have.
     # Those assertions are fetched from that rule in the two lines below.
     #   :INFO mgl:personal_characteristics :CHAR-SUB-PROPERTY.
