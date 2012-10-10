@@ -12,19 +12,21 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
-@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
-@prefix mgl66a: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1#>.
-@prefix board_cert: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_Board_Certified#>.
+@prefix mgl: <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT#>.
+@prefix mglcja: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT#>.
+@prefix mgl66a: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1#>.
+@prefix board_cert: <http://dice.csail.mit.edu/idm/MA/rules/MGL_Board_Certified#>.
 @prefix time: <http://www.w3.org/2000/10/swap/time#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
-@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172#>.
+@prefix : <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix idm: <urn:test:idmanagement.gov:icam:attribute:v1:>.
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>.
 
-@forAll :S, :P, :R, :INFO, :IMPOSED, :LENGTH, :EVENT.
-@forAll :SENDER, :RECEIVER, :DOC-DATA, :DATA, :SUBJECT.
-@forAll :SITUATION, :HERE, :AGENCY, :FUNCTION, :CORI.
+@forAll :S, :P, :R, :O, :INFO, :IMPOSED, :LENGTH, :EVENT.
+@forAll :SENDER, :RECEIVER, :DOC-DATA, :ORG-DATA, :DATA, :SUBJECT.
+@forAll :SITUATION, :HERE, :ORG, :AGENCY, :FUNCTION, :CORI.
 @forAll :ONTOLOGY, :ONTOLOGY2, :LOG, :CONJUNCTION.
 @forAll :CHAR-SUB-PROPERTY, :MEMBERSHIP.
 @forAll :CONVICTION_DATA, :CUSTODY_STATUS, :ABOUT.
@@ -302,7 +304,19 @@
         :S log:semantics :SENDER.
         :R log:semantics :RECEIVER.
         :DATA log:semantics :DOC-DATA.
-	:SENDER log:includes { :S foaf:government_type mgl:MA_Executive_Branch. }.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname.  In practice it should probably match
+        #       everything from the OrgName up (ST, C)
+ 	:SENDER log:includes { :S idm:organizationName :O }.
+	# TODO: This is cheap (it references the MSP profile
+        #       directly).  In practice this should be a standalone
+        #       file with all orgs.
+	<http://dice.csail.mit.edu/idm/MA/profiles/MSP> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :ORG a org:GovernmentAgency;
+	        rdfs:label :O ;
+		org:parentOrganization <http://dice.csail.mit.edu/idm/MA/profiles/ExecutiveBranch#ExecutiveBranch> .
+	}.
         # Add extract of who INFO is about when doc has it added.
         # :DOC-DATA log:includes { :INFO mgl:about :SUBJECT. }.
     };
