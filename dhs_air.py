@@ -7,10 +7,10 @@ import StringIO
 import urllib
 import re
 
-from cwmrete.tmswap import policyrunner
-from cwmrete.tmswap import llyn
-from cwmrete.tmswap.RDFSink import SUBJ, PRED, OBJ
-from cwmrete.tmswap import uripath
+from tmswap import policyrunner
+from tmswap import llyn
+from tmswap.RDFSink import SUBJ, PRED, OBJ
+from tmswap import uripath
 
 import render_law
 
