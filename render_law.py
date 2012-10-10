@@ -7,9 +7,9 @@ import tempfile
 from string import Template
 from optparse import OptionParser
 
-from cwmrete.tmswap import llyn
-from cwmrete.tmswap.RDFSink import SUBJ, PRED, OBJ
-from cwmrete.tmswap import uripath
+from tmswap import llyn
+from tmswap.RDFSink import SUBJ, PRED, OBJ
+from tmswap import uripath
 
 _RENDER_DEBUG_LEVEL = 0
 
