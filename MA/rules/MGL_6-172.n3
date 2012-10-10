@@ -191,7 +191,7 @@
         #       orgname and orgunitname.  In practice it should
         #       probably match everything from the OrgUnitName up (ST,
         #       C)
- 	:RECEIVER log:includes { :S idm:organizationUnitName :O; }.
+ 	:RECEIVER log:includes { :R idm:organizationUnitName :O; }.
 	# TODO: This is cheap (it references the ICE and DHS profiles
         #       directly).  In practice this should be a standalone
         #       file with all known in-state orgs.
