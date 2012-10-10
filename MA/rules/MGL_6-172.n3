@@ -197,7 +197,8 @@
 	<http://dice.csail.mit.edu/idm/US/profiles/ICE> log:semantics :ORG-DATA.
 	:ORG-DATA log:includes {
 	    :ORG a org:GovernmentAgency;
-	        rdfs:label :O .
+	        rdfs:label :O ;
+                law:primaryFunction :FUNCTION .
 	}.
 
         @forSome :log, :logsame, :rule .
@@ -207,8 +208,7 @@
 #        <file:///home/wdc/DIG/DHS-fusion/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         ( ( :log ) ( :rule ) ) air:justifies 
-           { :ORG air:compliant-with mgl66a:MGL_Ann_66A-1 .
-	     :ORG law:primaryFunction :FUNCTION . } } ;
+           { :ORG air:compliant-with mgl66a:MGL_Ann_66A-1 . } } ;
     air:then [ 
         # TODO: Description implies that R is acting with function, when right now this is keyed to the function of the CJA!
         air:description ( :R " performing function " :FUNCTION " is a member of a Criminal Justice Agency as defined by MGL 66A-1." );
