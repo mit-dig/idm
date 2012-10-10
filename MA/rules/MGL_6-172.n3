@@ -183,16 +183,33 @@
 :MGL_66A-1 a air:Belief-rule;
     air:if {
     	:EVENT mgl:to :R.
+        :R log:semantics :RECEIVER.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname and orgunitname.  In practice it should
+        #       probably match everything from the OrgUnitName up (ST,
+        #       C)
+ 	:RECEIVER log:includes { :S idm:organizationUnitName :O; }.
+	# TODO: This is cheap (it references the ICE and DHS profiles
+        #       directly).  In practice this should be a standalone
+        #       file with all known in-state orgs.
+	#       It also assumes that it will always have an orgunit.
+	<http://dice.csail.mit.edu/idm/US/profiles/ICE> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :ORG a org:GovernmentAgency;
+	        rdfs:label :O .
+	}.
+
         @forSome :log, :logsame, :rule .
 	# We don't need the MGL_66A-1_ONT.n3 in our call out to MGL_66A-1. 
         <http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :logsame .
-	( { :R a mglcja:Party . } :logsame ) log:conjunction :log .
+	( { :ORG a mglcja:Party . } :ORG-DATA :logsame ) log:conjunction :log .
 #        <file:///home/wdc/DIG/DHS-fusion/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         ( ( :log ) ( :rule ) ) air:justifies 
-           { :R air:compliant-with mgl66a:MGL_Ann_66A-1 .
-	     :R fusion:authorized_purpose :FUNCTION . } } ;
+           { :ORG air:compliant-with mgl66a:MGL_Ann_66A-1 .
+	     :ORG fusion:authorized_purpose :FUNCTION . } } ;
     air:then [ 
+        # TODO: Description implies that R is acting with function, when right now this is keyed to the function of the CJA!
         air:description ( :R " performing function " :FUNCTION " is a member of a Criminal Justice Agency as defined by MGL 66A-1." );
 #        air:assert [ air:statement { :R air:compliant-with :MGL_66A-1 . } ] ] .
         air:assert [ air:statement { :R a mglcja:member . } ] ] .
