@@ -32,10 +32,10 @@
 @forAll :RELEASE-DATE, :RELEASE-DATE-IN-SECS, :YEAR-IN-SECS, :MAX-LENGTH, :ENDPOINT.
 @forAll :TWO-YEARS-IN-SECS, :THREE-YEARS-IN-SECS.
 
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3".
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3".
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3".
-:MGL_Ann_6_172 fusion:transaction_ontology "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3".
+:MGL_Ann_6_172 fusion:transaction_ontology "http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT".
 
 :MGL_Ann_6_172 a air:Policy;
     air:rule :MGL_66A-1;			# Test for Criminal Justice Agency affiliation.
@@ -106,8 +106,8 @@
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
 	#:DOC-DATA log:includes {:INFO mgl:convicted_pursuant :CONVICTION_DATA. }.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:convicted_pursuant :CONVICTION_DATA. } .
     };
@@ -127,8 +127,8 @@
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
 	#:DOC-DATA log:includes {:INFO mgl:has_custody_status :CUSTODY_STATUS. }.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:has_custody_status :CUSTODY_STATUS. } .
     };
@@ -147,8 +147,8 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
-	<http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:sentence_imposed :ENDPOINT. } .
     };
@@ -167,8 +167,8 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:maximum_allowable_sentence_length :MAX-LENGTH. } .
     };
@@ -183,10 +183,10 @@
     	:EVENT mgl:to :R.
         @forSome :log, :logsame, :rule .
 	# We don't need the MGL_66A-1_ONT.n3 in our call out to MGL_66A-1. 
-        <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :logsame .
+        <http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :logsame .
 	( { :R a mglcja:Party . } :logsame ) log:conjunction :log .
 #        <file:///home/wdc/DIG/DHS-fusion/MA/rules/MGL_66A-1.n3> log:semantics :rule.
-        <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1.n3> log:semantics :rule.
+        <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         ( ( :log ) ( :rule ) ) air:justifies 
            { :R air:compliant-with mgl66a:MGL_Ann_66A-1 .
 	     :R fusion:authorized_purpose :FUNCTION . } } ;
@@ -546,7 +546,7 @@
     rdfs:comment "Dissemination of criminal offender record information shall, except as provided in this section and for purposes of research programs approved under section one hundred and seventy-four, be permitted only if the inquiry is based upon name, fingerprints, or other personal identifying characteristics.";
     # There are two ways to do this: One with air:owlEntails as follows:
     air:if {
-	 <http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	 <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
 	 (:ONTOLOGY :DOC-DATA) log:conjunction :CONJUNCTION .
 	 :CONJUNCTION air:owlEntails { :INFO mgl:personal_characteristics :SUBJECT } .
     # Or from having run the air:Belief-rule :MGL_Personal_Characteristics to assert what kind of Characteristic we have.
