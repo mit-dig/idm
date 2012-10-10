@@ -29,12 +29,10 @@ print """<html><head>
     <script src="index_files/ui.js" type="text/javascript"></script>
     <script src="index_files/jquery_002.js" type="text/javascript"></script>
     <script src="index_files/jquery_003.js" type="text/javascript"></script>
-    <script src="index_files/senders.txt" type="text/javascript"></script>
-    <script src="index_files/receivers.txt" type="text/javascript"></script>
     <script src="index_files/files.txt" type="text/javascript"></script>
-    <script src="index_files/policies.txt" type="text/javascript"></script>
 
     <script src="./data/users.json"></script>
+    <script src="./data/policies.json" type="text/javascript"></script>
 
   <style type="text/css">/* TREE LAYOUT */ .tree ul { margin:0 0 0 5px; padding:0 0 0 0; list-style-type:none; } .tree li { display:block; min-height:18px; line-height:18px; padding:0 0 0 15px; margin:0 0 0 0; /* Background fix */ clear:both; } .tree li ul { display:none; } .tree li a, .tree li span { display:inline-block;line-height:16px;height:16px;color:black;white-space:nowrap;text-decoration:none;padding:1px 4px 1px 4px;margin:0; } .tree li a:focus { outline: none; } .tree li a input, .tree li span input { margin:0;padding:0 0;display:inline-block;height:12px !important;border:1px solid white;background:white;font-size:10px;font-family:Verdana; } .tree li a input:not([class="xxx"]), .tree li span input:not([class="xxx"]) { padding:1px 0; } /* FOR DOTS */ .tree .ltr li.last { float:left; } .tree > ul li.last { overflow:visible; } /* OPEN OR CLOSE */ .tree li.open ul { display:block; } .tree li.closed ul { display:none !important; } /* FOR DRAGGING */ #jstree-dragged { position:absolute; top:-10px; left:-10px; margin:0; padding:0; } #jstree-dragged ul ul ul { display:none; } #jstree-marker { padding:0; margin:0; line-height:5px; font-size:1px; overflow:hidden; height:5px; position:absolute; left:-45px; top:-30px; z-index:1000; background-color:transparent; background-repeat:no-repeat; display:none; } #jstree-marker.marker { width:45px; background-position:-32px top; } #jstree-marker.marker_plus { width:5px; background-position:right top; } /* BACKGROUND DOTS */ .tree li li { overflow:hidden; } .tree > .ltr > li { display:table; } /* ICONS */ .tree ul ins { display:inline-block; text-decoration:none; width:16px; height:16px; } .tree .ltr ins { margin:0 4px 0 0px; } </style><link
  href="index_files/style.css" media="all" type="text/css" 
@@ -99,7 +97,7 @@ id="recipientimg" src="index_files/image-x-generic.png">
 2px; padding: 0.5em;">
       	<p>Please enter a policy's URL:</p>
         <input class="ui-autocomplete-input" autocomplete="off" 
-id="policybox" name="policybox" style="width: 30em;" value="IdMTestingPolicy">
+id="policybox" name="policybox" style="width: 30em;" value="Massachusetts MGL 6-172">
       </div>
       <div id="should_tb" style="border: 1px solid; margin: 2px; 
 padding: 0.5em;">
@@ -117,7 +115,7 @@ be disabled if you are not able to install Tabulator.</p></td>
         <p style="margin: 2px;">From: <span id="summary_sender"><a target="_blank" href="http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me">""" + cn + """</a></span></p>
         <p style="margin: 2px;">To: <span id="summary_recipient"></span></p>
         <p style="margin: 2px;">File: <span id="summary_file"></span></p>
-        <p style="margin: 2px;">Policy: <span id="summary_policy"><a target='_blank' href='http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy.n3'>IdMTestingPolicy</a></span></p>
+        <p style="margin: 2px;">Policy: <span id="summary_policy"><a target='_blank' href='http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172.n3'>Massachusetts MGL 6-172</a></span></p>
         <input style="float: right; margin-right: 1em;" value="Submit" 
 id="summary_submit" type="button">
       </div>
