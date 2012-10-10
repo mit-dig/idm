@@ -190,7 +190,7 @@ id="summary_submit" type="button">
           }).autocomplete("result",function(e,item) {
 //              $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
               var dn = ""
-              item.dn.forEach(function(val, key, arr) { dn += encodeURIComponent(key) + "=" + encodeURIComponent(val) + "&"; });
+              Object.getOwnPropertyNames(item.dn).forEach(function(key) { dn += encodeURIComponent(key) + "=" + encodeURIComponent(item.dn[key]) + "&"; });
               item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?" + dn.substr(0, dn.length - 1) + "#me";
               $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
