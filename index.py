@@ -11,8 +11,10 @@ if "SSL_CLIENT_S_DN" in os.environ:
         ["%s=%s" % (attribute[0].lower(), urllib.quote(attribute[1]))
          for attribute in [attribute.strip().split("=", 2)
                            for attribute in os.environ["SSL_CLIENT_S_DN"].split("/")[1:]]])
+    cn = os.environ["SSL_CLIENT_S_DN_CN"]
 else:
     dn = ""
+    cn = ""
 
 print "Content-type: text/html"
 print
@@ -27,12 +29,10 @@ print """<html><head>
     <script src="index_files/ui.js" type="text/javascript"></script>
     <script src="index_files/jquery_002.js" type="text/javascript"></script>
     <script src="index_files/jquery_003.js" type="text/javascript"></script>
-    <script src="index_files/senders.txt" type="text/javascript"></script>
-    <script src="index_files/receivers.txt" type="text/javascript"></script>
-    <script src="index_files/files.txt" type="text/javascript"></script>
-    <script src="index_files/policies.txt" type="text/javascript"></script>
 
-    <script src="./data/users.json"></script>
+    <script src="./data/files.json" type="text/javascript"></script>
+    <script src="./data/users.json" type="text/javascript"></script>
+    <script src="./data/policies.json" type="text/javascript"></script>
 
   <style type="text/css">/* TREE LAYOUT */ .tree ul { margin:0 0 0 5px; padding:0 0 0 0; list-style-type:none; } .tree li { display:block; min-height:18px; line-height:18px; padding:0 0 0 15px; margin:0 0 0 0; /* Background fix */ clear:both; } .tree li ul { display:none; } .tree li a, .tree li span { display:inline-block;line-height:16px;height:16px;color:black;white-space:nowrap;text-decoration:none;padding:1px 4px 1px 4px;margin:0; } .tree li a:focus { outline: none; } .tree li a input, .tree li span input { margin:0;padding:0 0;display:inline-block;height:12px !important;border:1px solid white;background:white;font-size:10px;font-family:Verdana; } .tree li a input:not([class="xxx"]), .tree li span input:not([class="xxx"]) { padding:1px 0; } /* FOR DOTS */ .tree .ltr li.last { float:left; } .tree > ul li.last { overflow:visible; } /* OPEN OR CLOSE */ .tree li.open ul { display:block; } .tree li.closed ul { display:none !important; } /* FOR DRAGGING */ #jstree-dragged { position:absolute; top:-10px; left:-10px; margin:0; padding:0; } #jstree-dragged ul ul ul { display:none; } #jstree-marker { padding:0; margin:0; line-height:5px; font-size:1px; overflow:hidden; height:5px; position:absolute; left:-45px; top:-30px; z-index:1000; background-color:transparent; background-repeat:no-repeat; display:none; } #jstree-marker.marker { width:45px; background-position:-32px top; } #jstree-marker.marker_plus { width:5px; background-position:right top; } /* BACKGROUND DOTS */ .tree li li { overflow:hidden; } .tree > .ltr > li { display:table; } /* ICONS */ .tree ul ins { display:inline-block; text-decoration:none; width:16px; height:16px; } .tree .ltr ins { margin:0 4px 0 0px; } </style><link
  href="index_files/style.css" media="all" type="text/css" 
@@ -43,10 +43,8 @@ src="./img/idm_header_logo.png">
 margin-right: auto;">
       <div id="sender" style="height: 8em; border: 1px solid; margin: 
 2px; padding: 0.5em;">
-      	<p>Please enter the sender's URL:</p>
-        <input class="ui-autocomplete-input" autocomplete="off" 
-id="senderbox" name="senderbox" style="margin-top: 1em; float: left; 
-width: 30em;">
+      	<p>The sender's URL:</p>
+        <a target="_blank" href="http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me">""" + cn + """</a>
         <img style="float: right; margin-left: 0.5em; margin-right: 
 auto; height: 5em; width: 5em;" id="senderimg" 
 src="index_files/image-x-generic.png">
@@ -99,7 +97,7 @@ id="recipientimg" src="index_files/image-x-generic.png">
 2px; padding: 0.5em;">
       	<p>Please enter a policy's URL:</p>
         <input class="ui-autocomplete-input" autocomplete="off" 
-id="policybox" name="policybox" style="width: 30em;" value="IdMTestingPolicy">
+id="policybox" name="policybox" style="width: 30em;" value="Massachusetts MGL 6-172">
       </div>
       <div id="should_tb" style="border: 1px solid; margin: 2px; 
 padding: 0.5em;">
@@ -114,10 +112,10 @@ be disabled if you are not able to install Tabulator.</p></td>
       </div>
       <div id="summary" style="height: 10em; border: 1px solid; margin: 
 2px; padding: 0.5em;">
-        <p style="margin: 2px;">From: <span id="summary_sender"></span></p>
+        <p style="margin: 2px;">From: <span id="summary_sender"><a target="_blank" href="http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me">""" + cn + """</a></span></p>
         <p style="margin: 2px;">To: <span id="summary_recipient"></span></p>
         <p style="margin: 2px;">File: <span id="summary_file"></span></p>
-        <p style="margin: 2px;">Policy: <span id="summary_policy"><a target='_blank' href='http://dice.csail.mit.edu/2012/JHU/rules/IdMTestingPolicy.n3'>IdMTestingPolicy</a></span></p>
+        <p style="margin: 2px;">Policy: <span id="summary_policy"><a target='_blank' href='http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172.n3'>Massachusetts MGL 6-172</a></span></p>
         <input style="float: right; margin-right: 1em;" value="Submit" 
 id="summary_submit" type="button">
       </div>
@@ -134,6 +132,7 @@ id="summary_submit" type="button">
   
     $(document).ready(function(){
       $('#filebox').attr("value", "");
+/*
       $('#senderbox').autocomplete({
           data: users,
           matchContains:true,
@@ -172,7 +171,7 @@ id="summary_submit" type="button">
                       },
                       dataType: "jsonp"
               });
-          });
+          });*/
           
       $('#recipientbox').autocomplete({
           data: users,
@@ -188,7 +187,9 @@ id="summary_submit" type="button">
           }
           }).autocomplete("result",function(e,item) {
 //              $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+ "</a> &lt;"+item.email+"&gt;");
-              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?""" + dn + """#me";
+              var dn = ""
+              Object.getOwnPropertyNames(item.dn).forEach(function(key) { dn += encodeURIComponent(key) + "=" + encodeURIComponent(item.dn[key]) + "&"; });
+              item.uri = "http://dice.csail.mit.edu/idm/idm_query.cgi?" + dn.substr(0, dn.length - 1) + "#me";
               $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
               var converturi = "http://mr-burns.w3.org/?data-uri[]="+escape(docpart)+"&input=&output=jsonp";
@@ -291,11 +292,11 @@ id="summary_submit" type="button">
     function callToTabulator(sender, recipient, document, policy, senderLabel, recipientLabel){
     	  if (!isValidURL(sender) && !isValidURL(recipient) && !isValidURL(document)){        
 		  $('#summary_recipient').html("");
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  $('#summary_file').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender, recipient and document file and try submitting again.");
 	  }else if (!isValidURL(sender) && !isValidURL(document)){
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  $('#summary_file').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender and document file and try submitting agian.");
 	  }else if(!isValidURL(recipient) && !isValidURL(document)){
@@ -304,10 +305,10 @@ id="summary_submit" type="button">
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired recipient and document file and try submitting again.");
 	  }else if (!isValidURL(sender) && !isValidURL(recipient)){        
 		  $('#summary_recipient').html("");
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  alert("The inputed URLs are invalid. Please insert a valid URLs for the desired sender and recipient and try submitting again.");
 	  }else if (!isValidURL(sender)){
-		  $('#summary_sender').html("");
+		  //$('#summary_sender').html("");
 		  alert("The inputed URL is invalid. Please insert a valid URL for the desired sender and try submitting agian.");
 	  }else if(!isValidURL(recipient)){
 		  $('#summary_recipient').html("");
@@ -329,7 +330,7 @@ id="summary_submit" type="button">
 		  if (recipientLabel) { log += "&to_label="+escape(recipientLabel); }
 		  /* var policyrunner = "http://samuelsw.scripts.mit.edu/dhs_air.py"; */
 		  /* var policyrunner = "http://mr-burns.w3.org/cgi-bin/dhs_air.py"; */
-		  var policyrunner = "http://dice.csail.mit.edu/dhs_air.py";
+		  var policyrunner = "http://dice.csail.mit.edu/idm/dhs_air.py";
       
 		  policyrunner = policyrunner + "?" + log;
 		  window.open( policyrunner );
@@ -339,13 +340,15 @@ id="summary_submit" type="button">
 $('#summary_submit').click( function( e ) { 
   var sender;
   var sender_label = undefined;
+/*
   if($('#summary_sender').children('a:eq(0)').attr('href') == undefined){
   	  sender = senderbox.value;
           $('#summary_sender').html("<a target='_blank' href='"+sender+"'>"+sender+"</a>");
   }else{
+*/
   	  sender = $('#summary_sender').children('a:eq(0)').attr('href');
   	  sender_label = $('#summary_sender').children('a:eq(0)').html();
-  }
+//  }
   
   var recipient;
   var recipient_label = undefined;

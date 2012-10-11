@@ -12,19 +12,24 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
-@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
-@prefix mgl66a: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1#>.
-@prefix board_cert: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_Board_Certified#>.
+@prefix mgl: <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT#>.
+# TODO: Hack around because I don't want to tamper with XMP at this point.
+@prefix mglont: <http://dig.csail.mit.edu/2010/DHS-fusion/MA/rules/MGL_6-172_ONT#>.
+@prefix mglcja: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT#>.
+@prefix mgl66a: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1#>.
+@prefix board_cert: <http://dice.csail.mit.edu/idm/MA/rules/MGL_Board_Certified#>.
 @prefix time: <http://www.w3.org/2000/10/swap/time#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
-@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172#>.
+@prefix : <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix idm: <urn:test:idmanagement.gov:icam:attribute:v1:>.
+@prefix org: <http://dice.csail.mit.edu/idm/common/org#>.
+@prefix law: <http://dice.csail.mit.edu/idm/common/law#>.
 
-@forAll :S, :P, :R, :INFO, :IMPOSED, :LENGTH, :EVENT.
-@forAll :SENDER, :RECEIVER, :DOC-DATA, :DATA, :SUBJECT.
-@forAll :SITUATION, :HERE, :AGENCY, :FUNCTION, :CORI.
+@forAll :S, :P, :R, :O, :INFO, :IMPOSED, :LENGTH, :EVENT.
+@forAll :SENDER, :RECEIVER, :DOC-DATA, :ORG-DATA, :DATA, :SUBJECT.
+@forAll :SITUATION, :HERE, :ORG, :AGENCY, :FUNCTION, :CORI.
 @forAll :ONTOLOGY, :ONTOLOGY2, :LOG, :CONJUNCTION.
 @forAll :CHAR-SUB-PROPERTY, :MEMBERSHIP.
 @forAll :CONVICTION_DATA, :CUSTODY_STATUS, :ABOUT.
@@ -32,10 +37,10 @@
 @forAll :RELEASE-DATE, :RELEASE-DATE-IN-SECS, :YEAR-IN-SECS, :MAX-LENGTH, :ENDPOINT.
 @forAll :TWO-YEARS-IN-SECS, :THREE-YEARS-IN-SECS.
 
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3".
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3".
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3".
-:MGL_Ann_6_172 fusion:transaction_ontology "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3".
+:MGL_Ann_6_172 fusion:transaction_ontology "http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT".
 
 :MGL_Ann_6_172 a air:Policy;
     air:rule :MGL_66A-1;			# Test for Criminal Justice Agency affiliation.
@@ -106,8 +111,8 @@
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
 	#:DOC-DATA log:includes {:INFO mgl:convicted_pursuant :CONVICTION_DATA. }.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:convicted_pursuant :CONVICTION_DATA. } .
     };
@@ -127,8 +132,8 @@
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
 	#:DOC-DATA log:includes {:INFO mgl:has_custody_status :CUSTODY_STATUS. }.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:has_custody_status :CUSTODY_STATUS. } .
     };
@@ -147,8 +152,8 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
-	<http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:sentence_imposed :ENDPOINT. } .
     };
@@ -167,8 +172,8 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :DATA log:semantics :DOC-DATA.
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
-	<http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
+	<http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+	<http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :ONTOLOGY2 .
 	(:ONTOLOGY :ONTOLOGY2 :DOC-DATA) log:conjunction :CONJUNCTION .
 	:CONJUNCTION air:owlEntails { :INFO mgl:maximum_allowable_sentence_length :MAX-LENGTH. } .
     };
@@ -181,16 +186,33 @@
 :MGL_66A-1 a air:Belief-rule;
     air:if {
     	:EVENT mgl:to :R.
+        :R log:semantics :RECEIVER.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname and orgunitname.  In practice it should
+        #       probably match everything from the OrgUnitName up (ST,
+        #       C)
+ 	:RECEIVER log:includes { :R idm:organizationUnitName :O; }.
+	# TODO: This is cheap (it references the ICE and DHS profiles
+        #       directly).  In practice this should be a standalone
+        #       file with all known in-state orgs.
+	#       It also assumes that it will always have an orgunit.
+	<http://dice.csail.mit.edu/idm/US/profiles/ICE> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :ORG a org:GovernmentAgency;
+	        rdfs:label :O ;
+                law:primaryFunction :FUNCTION .
+	}.
+
         @forSome :log, :logsame, :rule .
 	# We don't need the MGL_66A-1_ONT.n3 in our call out to MGL_66A-1. 
-        <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3> log:semantics :logsame .
-	( { :R a mglcja:Party . } :logsame ) log:conjunction :log .
+        <http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3> log:semantics :logsame .
+	( { :ORG a mglcja:Party . } :ORG-DATA :logsame ) log:conjunction :log .
 #        <file:///home/wdc/DIG/DHS-fusion/MA/rules/MGL_66A-1.n3> log:semantics :rule.
-        <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1.n3> log:semantics :rule.
+        <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1.n3> log:semantics :rule.
         ( ( :log ) ( :rule ) ) air:justifies 
-           { :R air:compliant-with mgl66a:MGL_Ann_66A-1 .
-	     :R fusion:authorized_purpose :FUNCTION . } } ;
+           { :ORG air:compliant-with mgl66a:MGL_Ann_66A-1 . } } ;
     air:then [ 
+        # TODO: Description implies that R is acting with function, when right now this is keyed to the function of the CJA!
         air:description ( :R " performing function " :FUNCTION " is a member of a Criminal Justice Agency as defined by MGL 66A-1." );
 #        air:assert [ air:statement { :R air:compliant-with :MGL_66A-1 . } ] ] .
         air:assert [ air:statement { :R a mglcja:member . } ] ] .
@@ -234,7 +256,20 @@
             mgl:data :INFO;
             mgl:doc-data :DATA.
         :R log:semantics :RECEIVER.
-        :RECEIVER log:includes {:R foaf:member :MEMBERSHIP. }.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname and orgunitname.  In practice it should
+        #       probably match everything from the OrgUnitName up (ST,
+        #       C)
+ 	:RECEIVER log:includes { :R idm:organizationUnitName :O; }.
+	# TODO: This is cheap (it references the ICE and DHS profiles
+        #       directly).  In practice this should be a standalone
+        #       file with all known in-state orgs.
+	#       It also assumes that it will always have an orgunit.
+	<http://dice.csail.mit.edu/idm/US/profiles/ICE> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :MEMBERSHIP a org:GovernmentAgency;
+	        rdfs:label :O .
+	}.
     };
     air:then [ 
 	air:description (  :R " is a member of organization " :MEMBERSHIP ".");
@@ -302,7 +337,19 @@
         :S log:semantics :SENDER.
         :R log:semantics :RECEIVER.
         :DATA log:semantics :DOC-DATA.
-	:SENDER log:includes { :S foaf:government_type mgl:MA_Executive_Branch. }.
+	# TODO: This is a crude mechanism that only matches the
+        #       orgname.  In practice it should probably match
+        #       everything from the OrgName up (ST, C)
+ 	:SENDER log:includes { :S idm:organizationName :O }.
+	# TODO: This is cheap (it references the MSP profile
+        #       directly).  In practice this should be a standalone
+        #       file with all known in-state orgs.
+	<http://dice.csail.mit.edu/idm/MA/profiles/MSP> log:semantics :ORG-DATA.
+	:ORG-DATA log:includes {
+	    :ORG a org:GovernmentAgency;
+	        rdfs:label :O ;
+		org:parentOrganization <http://dice.csail.mit.edu/idm/MA/profiles/ExecutiveBranch#ExecutiveBranch> .
+	}.
         # Add extract of who INFO is about when doc has it added.
         # :DOC-DATA log:includes { :INFO mgl:about :SUBJECT. }.
     };
@@ -318,7 +365,7 @@
     rdfs:comment "Except as otherwise provided in this section and sections one hundred and seventy-three to one hundred and seventy-five, inclusive, criminal offender record information, and where present, evaluative information, shall be disseminated, whether directly or through any intermediary, only to criminal justice agencies.";
     air:if {
         :R a mglcja:member .
-    	:ABOUT a mgl:Criminal_Offender_Record_Information.
+    	:ABOUT a mglont:Criminal_Offender_Record_Information.
     };
     air:then [
         air:description
@@ -546,9 +593,9 @@
     rdfs:comment "Dissemination of criminal offender record information shall, except as provided in this section and for purposes of research programs approved under section one hundred and seventy-four, be permitted only if the inquiry is based upon name, fingerprints, or other personal identifying characteristics.";
     # There are two ways to do this: One with air:owlEntails as follows:
     air:if {
-	 <http://dig.csail.mit.edu/2012/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
+         <http://dig.csail.mit.edu/2010/DHS-fusion/MA/rules/MGL_6-172_ONT.n3> log:semantics :ONTOLOGY .
 	 (:ONTOLOGY :DOC-DATA) log:conjunction :CONJUNCTION .
-	 :CONJUNCTION air:owlEntails { :INFO mgl:personal_characteristics :SUBJECT } .
+	 :CONJUNCTION air:owlEntails { :INFO mglont:personal_characteristics :SUBJECT } .
     # Or from having run the air:Belief-rule :MGL_Personal_Characteristics to assert what kind of Characteristic we have.
     # Those assertions are fetched from that rule in the two lines below.
     #   :INFO mgl:personal_characteristics :CHAR-SUB-PROPERTY.

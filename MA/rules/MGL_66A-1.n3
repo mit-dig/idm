@@ -11,20 +11,21 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
+@prefix mglcja: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT#>.
 @prefix time: <http://www.w3.org/2000/10/swap/time#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
-@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1#>.
+@prefix : <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix fusion: <http://dig.csail.mit.edu/2012/DHS/JHU/common/fusion_ONT#>.
+@prefix law: <http://dice.csail.mit.edu/idm/common/law#>.
 
-@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/DHS/rules/dhs_ONT#>.
+@prefix dhs: <http://dice.csail.mit.edu/ice/US/DHS/rules/dhs_ONT#>.
 
 @forAll :P, :PARTY, :FUNCTION.
 
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT.n3".
-:MGL_Ann_6_172 rdfs:seeAlso "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs.n3".
-:MGL_Ann_6_172 fusion:transaction_ontology "http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT.n3".
+:MGL_Ann_6_172 rdfs:seeAlso "http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs.n3".
+:MGL_Ann_6_172 fusion:transaction_ontology "http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT".
 
 :MGL_Ann_66A-1 a air:Policy;
     air:rule :MGL_66A-1_Function;				# Set up tests for Criminal Justice agencies.
@@ -62,7 +63,8 @@
 :MGL_66A-1_init a air:Belief-rule;
     air:if {
         :P a mglcja:Party.
-        :P fusion:authorized_purpose :FUNCTION.
+        :P law:primaryFunction :FUNCTION .
+#        :P fusion:authorized_purpose :FUNCTION.
     };
     air:then [air:rule :MGL_66A-1_apprehension ].
 

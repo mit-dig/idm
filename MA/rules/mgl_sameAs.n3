@@ -15,11 +15,12 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix air: <http://dig.csail.mit.edu/TAMI/2007/amord/air#>.
 
-@prefix : <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/mgl_sameAs#> .
+@prefix : <http://dice.csail.mit.edu/idm/MA/rules/mgl_sameAs#> .
 
-@prefix mgl: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_6-172_ONT#>.
-@prefix mglcja: <http://dig.csail.mit.edu/2012/DHS/JHU/MA/rules/MGL_66A-1_ONT#>.
-@prefix dhs: <http://dig.csail.mit.edu/2012/DHS/JHU/US/rules/dhs_ONT#> .
+@prefix mgl: <http://dice.csail.mit.edu/idm/MA/rules/MGL_6-172_ONT#>.
+@prefix mglcja: <http://dice.csail.mit.edu/idm/MA/rules/MGL_66A-1_ONT#>.
+@prefix law: <http://dice.csail.mit.edu/idm/common/law#>.
+@prefix dhs: <http://dice.csail.mit.edu/idm/US/rules/dhs_ONT#> .
 @prefix mdccl: <http://dig.csail.mit.edu/2012/DHS-fusion/MD/rules/MdCodeComLaw_12_15_01_03_ONT#> .
 @prefix fdle: <http://dig.csail.mit.edu/2012/DHS-fusion/FL/rules/fl_ONT#> .
 
@@ -32,6 +33,9 @@ dhs:apprehension owl:sameAs mglcja:apprehension.
 dhs:enforcement owl:sameAs mglcja:usage.
 dhs:investigation owl:sameAs mglcja:collection.
 dhs:Function owl:sameAs mgl:Function.
+
+# Generic LAW Ontology Relations
+law:Investigation owl:sameAs mglcja:collection.
 
 # Maryland Relations
 
