@@ -264,6 +264,7 @@ def xml_to_RDF(xml_string):
 	
 	# Add triples using store's add method.
 	store.add((user, RDF.type, FOAF["Person"]))
+	store.add((user, FOAF["name"], "Mia Analysa"))
 	
 	for child in root:
 		if "AttributeStatement" in child.tag:
