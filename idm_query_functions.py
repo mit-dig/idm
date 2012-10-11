@@ -12,6 +12,7 @@ from rdflib.namespace import Namespace, RDF
 import hashlib
 import base64
 import OpenSSL
+import os
 
 def make_soap_file(distinguished_name):
 
@@ -191,8 +192,9 @@ def make_soap_file_QA(distinguished_name):
 	#print tostring(envelope, pretty_print=True)
 	return tostring(envelope)
 
-def fetch_person_info(distinguished_name, use_test_webservice=False):
-	LOGGING = True;
+def fetch_person_info(distinguished_name, use_test_webservice=False, logging=True):
+	
+	LOGGING = True if logging is True else False;
 	
 	tstart = datetime.datetime.now()
 	if (use_test_webservice):
@@ -216,6 +218,7 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 	tread = datetime.datetime.now()
 	
 	decrypted_content = run_test_scenario(content)
+	#print decrypted_content
 	tdecrypt = datetime.datetime.now()
 	
 	rdf_output = xml_to_RDF(decrypted_content)
@@ -224,6 +227,15 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 	if LOGGING is True:
 		#start date and time, makereq time, request time, read time, decrypt time, convert time, total time
 		list = [str(tstart), total_seconds(tmakereq-tstart), total_seconds(treq-tmakereq), total_seconds(tread-treq), total_seconds(tdecrypt-tread), total_seconds(tconvert-tdecrypt), total_seconds(tconvert-tstart)]
+		if os.path.exists("idm.log") is False:
+			log = open("idm.log", "w")
+			log.write("Start Time\tGenerate Soap\tResponse Time\tRead Response Time\tDecrypt Time\tConvert to RDF Time\tTotal Time\n")
+			log.close()
+		log = open("idm.log", "a")
+		for time in list:
+			log.write(str(time) + "\t")
+		log.write("\n")
+		log.close()		
 		#print list
 		
 	return rdf_output
