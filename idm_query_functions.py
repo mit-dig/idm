@@ -264,14 +264,24 @@ def xml_to_RDF(xml_string):
 	
 	# Add triples using store's add method.
 	store.add((user, RDF.type, FOAF["Person"]))
-	store.add((user, FOAF["name"], Literal("Mia Analysa")))
+	#define list to hold the full_name = (givenName, surName)
+	full_name = [None, None]
 	
 	for child in root:
 		if "AttributeStatement" in child.tag:
 			for child1 in child:
 				for child2 in child1:
-						store.add((user, URIRef(child1.attrib.get("Name")),Literal(child2.text)))
-	
+						child1_name_attrib = child1.attrib.get("Name")
+						if "givenName" in child1_name_attrib:
+							full_name[0] = child2.text
+							if full_name[1] is not None:
+								store.add((user, FOAF.name, Literal(full_name[0]+' '+full_name[1])))
+						elif "sn" in child1_name_attrib:
+							full_name[1] = child2.text
+							if full_name[0] is not None:
+								store.add((user, FOAF.name, Literal(full_name[0]+' '+full_name[1])))
+						store.add((user, URIRef(child1_name_attrib),Literal(child2.text)))
+						
 	rdf_output = store.serialize()
 	
 	return store
@@ -296,8 +306,8 @@ def xml_to_RDF(xml_string):
 
 def main():
 	#full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
-	#full_distinguished_name = "CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US"
-	full_distinguished_name = "CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
+	full_distinguished_name = "CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US"
+	#full_distinguished_name = "CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
 	rdf_output = fetch_person_info(full_distinguished_name, True) 
 	for s,p,o in rdf_output:
 		print "==================BEGIN============="
