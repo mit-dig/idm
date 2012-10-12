@@ -12,6 +12,7 @@ from rdflib.namespace import Namespace, RDF
 import hashlib
 import base64
 import OpenSSL
+import os
 
 def make_soap_file(distinguished_name):
 
@@ -191,8 +192,9 @@ def make_soap_file_QA(distinguished_name):
 	#print tostring(envelope, pretty_print=True)
 	return tostring(envelope)
 
-def fetch_person_info(distinguished_name, use_test_webservice=False):
-	LOGGING = True;
+def fetch_person_info(distinguished_name, use_test_webservice=False, logging=True):
+	
+	LOGGING = True if logging is True else False;
 	
 	tstart = datetime.datetime.now()
 	if (use_test_webservice):
@@ -216,17 +218,33 @@ def fetch_person_info(distinguished_name, use_test_webservice=False):
 	tread = datetime.datetime.now()
 	
 	decrypted_content = run_test_scenario(content)
+	#print decrypted_content
 	tdecrypt = datetime.datetime.now()
 	
 	rdf_output = xml_to_RDF(decrypted_content)
 	tconvert = datetime.datetime.now()
 	
-#	if LOGGING is True:
+	if LOGGING is True:
 		#start date and time, makereq time, request time, read time, decrypt time, convert time, total time
-		#list = [str(tstart), (tmakereq-tstart).total_seconds(), (treq-tmakereq).total_seconds(), (tread-treq).total_seconds(), (tdecrypt-tread).total_seconds(), (tconvert-tdecrypt).total_seconds(), (tconvert-tstart).total_seconds()]
+		list = [str(tstart), total_seconds(tmakereq-tstart), total_seconds(treq-tmakereq), total_seconds(tread-treq), total_seconds(tdecrypt-tread), total_seconds(tconvert-tdecrypt), total_seconds(tconvert-tstart)]
+		if os.path.exists("idm.log") is False:
+			log = open("idm.log", "w")
+			log.write("Start Time\tGenerate Soap\tResponse Time\tRead Response Time\tDecrypt Time\tConvert to RDF Time\tTotal Time\n")
+			log.close()
+		log = open("idm.log", "a")
+		for time in list:
+			log.write(str(time) + "\t")
+		log.write("\n")
+		log.close()		
 		#print list
 		
 	return rdf_output
+
+def total_seconds(timedelta):
+	
+	totalseconds = timedelta.days * 24 * 3600 + timedelta.seconds + timedelta.microseconds/1000000.0
+	
+	return totalseconds
 
 def xml_to_RDF(xml_string):
 	
@@ -246,13 +264,24 @@ def xml_to_RDF(xml_string):
 	
 	# Add triples using store's add method.
 	store.add((user, RDF.type, FOAF["Person"]))
+	#define list to hold the full_name = (givenName, surName)
+	full_name = [None, None]
 	
 	for child in root:
 		if "AttributeStatement" in child.tag:
 			for child1 in child:
 				for child2 in child1:
-						store.add((user, URIRef(child1.attrib.get("Name")),Literal(child2.text)))
-	
+						child1_name_attrib = child1.attrib.get("Name")
+						if "givenName" in child1_name_attrib:
+							full_name[0] = child2.text
+							if full_name[1] is not None:
+								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+						elif "sn" in child1_name_attrib:
+							full_name[1] = child2.text
+							if full_name[0] is not None:
+								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+						store.add((user, URIRef(child1_name_attrib),Literal(child2.text)))
+						
 	rdf_output = store.serialize()
 	
 	return store
@@ -277,8 +306,8 @@ def xml_to_RDF(xml_string):
 
 def main():
 	#full_distinguished_name = "CN=Deanna Troi + UID=9000000004,OU=People,OU=DHS HQ,OU=Directorate of Homeworld Security,O=Starfleet,C=UFP"
-	#full_distinguished_name = "CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US"
-	full_distinguished_name = "CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
+	full_distinguished_name = "CN=Mia Analysa, O=Massachusetts State Police, ST=Massachusetts, C=US"
+	#full_distinguished_name = "CN=Frederick Agenti, OU=Immigration and Customs Enforcement, O=Department of Homeland Security, ST=District of Columbia, C=US"
 	rdf_output = fetch_person_info(full_distinguished_name, True) 
 	for s,p,o in rdf_output:
 		print "==================BEGIN============="
