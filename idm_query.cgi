@@ -29,7 +29,7 @@ if form.has_key("cn"):
 	print "Content-type: application/rdf+xml"
 	print
 	# Sometimes it shouldn't have commas! :downs:
-	if form.has_key("o") and form.getlist(key) == ["Starfleet"]:
+	if form.has_key("o") and form.getlist("o") == ["Starfleet"]:
 		print fetch_person_info(",".join(dn), use_test_webservice=True).serialize()
 	else:
 		print fetch_person_info(", ".join(dn), use_test_webservice=True).serialize()
