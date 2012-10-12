@@ -275,11 +275,11 @@ def xml_to_RDF(xml_string):
 						if "givenName" in child1_name_attrib:
 							full_name[0] = child2.text
 							if full_name[1] is not None:
-								store.add((user, FOAF.name, Literal(full_name[0]+' '+full_name[1])))
+								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
 						elif "sn" in child1_name_attrib:
 							full_name[1] = child2.text
 							if full_name[0] is not None:
-								store.add((user, FOAF.name, Literal(full_name[0]+' '+full_name[1])))
+								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
 						store.add((user, URIRef(child1_name_attrib),Literal(child2.text)))
 						
 	rdf_output = store.serialize()
