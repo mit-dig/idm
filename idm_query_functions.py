@@ -8,7 +8,7 @@ from decrypt import run_test_scenario
 import datetime
 from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal
-from rdflib.namespace import Namespace, RDF
+from rdflib.namespace import Namespace, RDF, RDFS
 import hashlib
 import base64
 import OpenSSL
@@ -275,11 +275,13 @@ def xml_to_RDF(xml_string):
 						if "givenName" in child1_name_attrib:
 							full_name[0] = child2.text
 							if full_name[1] is not None:
-								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+								#store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+								store.add((user, URIRef(RDFS.label), Literal(full_name[0]+' '+full_name[1])))
 						elif "sn" in child1_name_attrib:
 							full_name[1] = child2.text
 							if full_name[0] is not None:
-								store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+								#store.add((user, URIRef(FOAF.name), Literal(full_name[0]+' '+full_name[1])))
+								store.add((user, URIRef(RDFS.label), Literal(full_name[0]+' '+full_name[1])))
 						store.add((user, URIRef(child1_name_attrib),Literal(child2.text)))
 						
 	rdf_output = store.serialize()
