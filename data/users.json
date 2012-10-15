@@ -1,8 +1,8 @@
 var users = [
-/*	{ name: "Beverly Crusher"},
-	{ name: "Deanna Troi"},*/
+	{ name: "Beverly Crusher", dn: {cn: "Beverly Crusher + UID=9000000005", ou: "People,OU=FEMA,OU=Directorate of Homeworld Security", o: "Starfleet", c: "UFP"}},
+/*	{ name: "Deanna Troi"},*/
 	{ name: "Frederick Agenti", dn: {cn: "Frederick Agenti", ou: "Immigration and Customs Enforcement", o: "Department of Homeland Security", st: "District of Columbia", c: "US"}},
-/*	{ name: "Geordi LaForge"},
+/*	{ name: "Geordi LaForge", dn: {cn: "Geordi LaForge", ou: "Engineering", o: "Starfleet", c: "US"}},
 	{ name: "Jean-Luc Picard"},
 	{ name: "Mia Analysa"},*/
 ];
