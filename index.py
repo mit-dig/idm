@@ -193,7 +193,7 @@ id="summary_submit" type="button">
               $('#summary_recipient').html("<a target='_blank' href='"+item.uri+"'>"+item.name+"</a>");
               var docpart = item.uri.slice(0,item.uri.indexOf('#'));
               var converturi = "http://mr-burns.w3.org/?data-uri[]="+escape(docpart)+"&input=&output=jsonp";
-              $.ajax({
+              /*$.ajax({
                       url: converturi, 
                       success: function( data ) {
                           var dbtemp = $.rdf.databank();
@@ -211,7 +211,7 @@ id="summary_submit" type="button">
                           }
                       },
                       dataType: "jsonp"
-              });
+              });*/
           });
 
     $('#filetree').tree({
